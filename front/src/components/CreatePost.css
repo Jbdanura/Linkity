@@ -1,0 +1,29 @@
+.create-post textarea{
+    resize: none;
+    height: 30px;
+    font-size: 18px;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+.create-post textarea::placeholder{
+    font-size: 16px;
+    padding: 5px;
+    color: rgb(0, 0, 0);
+}
+.create-post{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    background-color: rgb(230, 230, 230);
+    padding: 10px;
+}
+.create-post button{
+    background-color: rgb(87, 130, 211);
+    color: white;
+    font-size: 20px;
+    width: 15%;
+    padding: 5px 0;
+    margin-left: 85%;
+    margin-top: 10px;
+}
