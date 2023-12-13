@@ -8,7 +8,8 @@ const HomeUnlogged = ({setUser}) => {
   
   return (
     <div className="homeUnlogged">
-      {!login ? <Register setLogin={setLogin}/> : <Login setLogin={setLogin} setUser={setUser}/>}
+      <Login setLogin={setLogin} setUser={setUser}/>
+      <Register setLogin={setLogin}/>
     </div>
   )
 }

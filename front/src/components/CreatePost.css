@@ -22,8 +22,28 @@
     background-color: rgb(87, 130, 211);
     color: white;
     font-size: 20px;
-    width: 15%;
+    width: 10%;
     padding: 5px 0;
-    margin-left: 85%;
+    margin-left: 90%;
     margin-top: 10px;
+}
+.create-post-errorMsg-show, .create-post-msg-show, .create-post-errorMsg-hide, .create-post-msg-hide{
+    position: absolute;
+    top: -100%;
+    padding: 20px;
+    color: white;
+    background-color: red;
+    left: 30%;
+    z-index: 999;
+    font-size: 25px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.create-post-msg-show{
+    background-color: green;
+}
+.create-post-msg-show,.create-post-errorMsg-show{
+    top: 20%;
+    transition:  all .5s ease-in-out;
 }

@@ -1,9 +1,6 @@
 .homeUnlogged{
-    background-image: url('../images/backgroundlogin.jpg');
-    background-position: center;
-    background-size: cover;
+    background-image: url(../images/backgroundlogin.png);
     background-repeat: no-repeat;
-    width: 100%;
-    position: absolute;
-    height: 100%;
+    background-size: 100% 100%;
+    height: 100vh;
 }

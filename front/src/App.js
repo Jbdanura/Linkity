@@ -6,7 +6,10 @@ import Home from './components/Home';
 
 function App() {
   const [user,setUser] = useState(null)
-
+  const logout = () =>{
+    setUser(null)
+    localStorage.removeItem("user")
+  }
   useEffect(()=>{
     const loggedUser = localStorage.getItem("user")
     if(loggedUser){
@@ -19,7 +22,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         {!user ? <HomeUnlogged setUser={setUser}/> :
-        <Home user={user}/>}
+        <Home user={user} logout={logout}/>}
       </BrowserRouter>
     </div>
   );

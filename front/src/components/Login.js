@@ -33,13 +33,10 @@ const Login = ({setLogin,setUser}) => {
         <form className="login-form" onSubmit={(e)=>login(e)}>
           <h2 className={errorMessage  ? 'showErrorMessage' : 'hideErrorMessage'}>{errorMessage}</h2>
           <h2 className={successMessage  ? 'showSuccessMessage' : 'hideSuccessMessage'}>{successMessage}</h2>
-            <label htmlFor="username">Username</label>
-            <input id="username" type="text" placeholder="Enter username" value={username} onChange={(e)=>setUsername(e.target.value)}></input>
-            <label htmlFor="password">Password</label>
-            <input id="password" type="password" placeholder="Enter password" value={password} onChange={(e)=>setPassword(e.target.value)}></input>
+            <input id="username" type="text" placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)}></input>
+            <input id="password" type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}></input>
             <button className="login-btn" type="submit">LOGIN</button>
         </form>
-        <p>Already have an account? <a href="#" onClick={()=>setLogin(false)}>Register</a></p>
     </div>
   )
 }

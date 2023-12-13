@@ -1,0 +1,10 @@
+.post-container{
+    width: 50%;
+    background-color: rgb(230, 230, 230);
+    padding: 10px;
+    margin: 10px 0;
+}
+.post-info{
+    display: flex;
+    justify-content: space-between;
+}

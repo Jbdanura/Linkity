@@ -1,70 +1,57 @@
-.register,.login{
-    background-color: rgba(59, 70, 165, 0.925);
-    width: 30vw;
-    margin: 0 auto;
+.login{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 200px;
     padding-bottom: 20px;
-    border-radius: 10px;
+    border-bottom: 1px solid rgb(128, 128, 128);
 }
-.register form,.login form{
-    width: 90%;
-    margin: 0 auto;
-    text-align: center;
-    position: relative;
+.login input{
+    padding: 10px;
+    background-color: rgba(240, 248, 255, 0.76);
+    border: 1px solid rgb(119, 119, 119);
+    margin-right: 5px;
+    border-radius: 5px;
 }
-.register input,.login input{
-    width: 90%;
-    background-color: rgba(0, 0, 0, 0.507);
-    color: rgb(240, 240, 240);
-    font-size: 25px;
-    font-weight: bold;
-    padding: 0px 15px;
-    border: 2px solid rgb(8, 1, 110);
-    border-radius: 3px;
-    margin: 5px 0;
-    font-family: "Yatra One";
-    margin-bottom: 10px;
+.login input::placeholder{
+    color: grey;
 }
-.register label, .login label{
-    font-family: "Yatra One";
-    font-size: 22px;
+.login h1{
+    color: white;
+}
+.login-btn{
+    padding: 8px 15px;
+    background-color: rgb(231, 231, 231);
+    border: 1px solid grey;
     font-weight: bolder;
-    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
-    color: rgb(36, 183, 241);
 }
-.register input:focus, .login input:focus{
-    border: 2px solid orange;
-    outline: none;
+.register{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 200px;
 }
-.register input::placeholder, .login input::placeholder{
+.register h3{
+    font-size: 50px;
+    color: rgb(255, 255, 255);
     font-weight: 100;
-    font-size: 18px;
-    font-family: "Yatra One";
-    color: rgba(255, 255, 255, 0.664);
 }
-.autocomplete{
-    background-color: red;
+.register-form{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin-top: 100px;
 }
-.register-btn, .login-btn{
-    padding: 10px 20px;
-    margin: 0 auto;
-    background-color: rgb(12, 74, 168);
-    color: rgb(255, 206, 44);
+.register-form input{
+    padding: 10px;
+    background-color: rgba(240, 248, 255, 0.747);
+    border: 1px solid grey;
+    margin: 5px;
+}
+.register-form p{
+    margin-left: 15px;
     font-weight: bolder;
-    font-size: 20px;
-    border: 1px solid rgb(99, 64, 0);
-    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
-    font-family: "Yatra One";
-}
-.register-btn:hover, .login-btn:hover{
-    cursor: pointer;
-}
-.register p, .login p{
-    font-size: 20px;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.479);
-    width: 60%;
-    margin: 0 auto;
-    margin-top: 10px;
+    color: white;
 }
 .showErrorMessage, .hideErrorMessage, .showSuccessMessage, .hideSuccessMessage {
     position: absolute;
@@ -74,54 +61,28 @@
     padding: 10px;
     border: 1px solid rgb(175, 0, 0);
     font-size: 23px;
-    width: 95%;
+    min-width: 20%;
+    left: 40%;
     text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
 }
 .showSuccessMessage,.hideSuccessMessage{
     background-color: rgb(53, 145, 53);
 }
 .showErrorMessage,.showSuccessMessage{
-    top: 10%;
+    top: 30%;
     transition:  all .5s ease-in-out;
 }
 .showSuccessMessage{
     border: 1px solid green;
 }
-.register h1, .login h1{
-    font-family: "Yatra One";
-    font-size: 80px;
-    background: -webkit-linear-gradient(rgb(255, 255, 255), rgb(24, 28, 250));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
-    text-align: center;
-    margin-bottom: 30px;
-}
-@media screen and (max-width: 1200px) {
-    .register, .login{
-        width: 50vw;
-    }
-}
-@media screen and (max-width: 600px) {
-    .register, .login{
-        width: 90vw;
-    }
-}
-@media screen and (max-height: 800px) {
-    .register, .login{
-        margin-top: -40px;
-    }
-    .register-btn, .login-btn{
-        font-size: 15px;
-    }
-    .register input,.login input{
-        font-size: 18px;
-    }
-    .register label, .login label{
-        font-size: 18px;
-    }
-    .register p, .login p{
-        font-size: 16px;
-    }
+.register-btn{
+    width: 100px;
+    height: 40px;
+    position: relative;
+    margin-left: 78%;
+    margin-top: 5px;
+    background-color: yellow;
+    border-radius: 5px;
+    border: 1px solid grey;
+    font-weight: bolder;
 }

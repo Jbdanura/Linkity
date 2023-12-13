@@ -29,12 +29,14 @@ const CreatePost = ({user}) => {
   }
 
   return (
+    <>
+    <p className={errorMsg ? "create-post-errorMsg-show" : "create-post-errorMsg-hide"}>{errorMsg}</p>
+    <p className={msg ? "create-post-msg-show" : "create-post-msg-hide"}>{msg}</p>
     <form className="create-post" onSubmit={(e)=>createPost(e)}>
-        {errorMsg && <p>{errorMsg}</p>}
-        {msg && <p>{msg}</p>}
         <textarea onChange={(e)=>setContent(e.target.value)} value={content} placeholder="Your post content here..."></textarea>
         <button>Post</button>
     </form>
+    </>
   )
 }
 
