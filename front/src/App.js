@@ -3,6 +3,7 @@ import {BrowserRouter, Routes,Route} from "react-router-dom"
 import { useState,useEffect } from 'react';
 import HomeUnlogged from "./components/HomeUnlogged"
 import Home from './components/Home';
+import Profile from "./components/Profile"
 
 function App() {
   const [user,setUser] = useState(null)
@@ -23,6 +24,9 @@ function App() {
       <BrowserRouter>
         {!user ? <HomeUnlogged setUser={setUser}/> :
         <Home user={user} logout={logout}/>}
+        <Routes>
+          <Route path="/user/:username" element={<Profile/>}></Route>
+        </Routes>
       </BrowserRouter>
     </div>
   );
