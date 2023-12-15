@@ -46,3 +46,27 @@
 .navbar input::placeholder{
     padding-left: 20px;
 }
+@media  screen and (max-width: 600px) {
+    .navbar input{
+        width: 150px;
+    }
+    .navbar button{
+        width: 80px;
+    }
+}
+@media  screen and (max-width: 400px) {
+    .navbar input{
+        width: 100px;
+    }
+    .navbar button{
+        width: 60px;
+    }
+    .navbar *{
+        font-size: 10px;
+    }
+}
+@media  screen and (max-width: 350px) {
+    .navbar input{
+        width: 80px;
+    }
+}

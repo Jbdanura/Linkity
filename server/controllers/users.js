@@ -57,7 +57,17 @@ usersRouter.get("/user/:username",async(req,res)=>{
     } catch (error) {
         return res.status(400).send(error)
     }
+})
+
+usersRouter.get("/recommended",async(req,res)=>{
+    try {
+        const users = await User.findAll({limit: 7,attributes:["username","id"]})
+        return res.status(200).send(users)
+    } catch (error) {
+        return res.status(400).send(error)
+    }
 
 })
+
 
 module.exports = usersRouter

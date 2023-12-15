@@ -43,14 +43,34 @@
 }
 @media  screen and (max-width: 700px) {
     .new-post{
-        width: 60vw;
+        width: 80vw;
     }
     .new-post input{
-        width: 45vw;
+        width: 65vw;
         font-size: 20px;
         padding-left: 20px;
     }
     .new-post img{
         margin-left: 0px;
+    }
+}
+@media  screen and (max-width: 500px) {
+    .new-post{
+        width: 85vw;
+        margin: 0;
+    }
+}
+@media  screen and (max-width: 400px) {
+    .new-post{
+        width: 80vw;
+        margin: 0;
+    }
+    .new-post input{
+        width: 55vw;
+    }
+}
+@media  screen and (max-width: 300px) {
+    .new-post{
+        width: 75vw;
     }
 }

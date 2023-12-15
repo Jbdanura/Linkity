@@ -77,4 +77,13 @@
     .home-left{
         display: none;
     }
+    .home-mid{
+        margin: 0;
+    }
+}
+@media  screen and (max-width: 350px) {
+    .home-container{
+        margin-top: 10px;
+        margin-left: 10px;
+    }
 }

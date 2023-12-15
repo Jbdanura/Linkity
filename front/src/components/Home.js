@@ -3,6 +3,7 @@ import Navbar from './Navbar'
 import UserIcon from "../images/user.png"
 import "./Home.css"
 import NewPost from './NewPost'
+import Recommended from './Recommended'
 
 const Home = ({user,logout}) => {
 
@@ -34,7 +35,7 @@ const Home = ({user,logout}) => {
           <NewPost/>
         </div>
         <div className="home-right">
-          
+          <Recommended/>
         </div>
       </div>
     </div>
