@@ -43,10 +43,11 @@
 }
 @media  screen and (max-width: 700px) {
     .new-post{
-        width: 80vw;
+        width: 88vw;
+        padding: 10px;
     }
     .new-post input{
-        width: 65vw;
+        width: 70vw;
         font-size: 20px;
         padding-left: 20px;
     }
@@ -54,12 +55,7 @@
         margin-left: 0px;
     }
 }
-@media  screen and (max-width: 500px) {
-    .new-post{
-        width: 85vw;
-        margin: 0;
-    }
-}
+
 @media  screen and (max-width: 400px) {
     .new-post{
         width: 80vw;
@@ -71,6 +67,7 @@
 }
 @media  screen and (max-width: 300px) {
     .new-post{
-        width: 75vw;
+        width: 85vw;
+        padding: 10px;
     }
 }

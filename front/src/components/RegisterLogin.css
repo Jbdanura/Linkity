@@ -36,10 +36,14 @@
     color: rgb(255, 255, 255);
     font-weight: 100;
 }
+.register h1{
+    display: none;
+}
 .register-form{
     display: flex;
     flex-direction: column;
     width: 30%;
+    position: relative;
     margin-top: 100px;
 }
 .register-form input{
@@ -64,6 +68,7 @@
     min-width: 20%;
     left: 40%;
     text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+    z-index: 999;
 }
 .showSuccessMessage,.hideSuccessMessage{
     background-color: rgb(53, 145, 53);
@@ -78,11 +83,95 @@
 .register-btn{
     width: 100px;
     height: 40px;
-    position: relative;
-    margin-left: 78%;
-    margin-top: 5px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
     background-color: yellow;
     border-radius: 5px;
     border: 1px solid grey;
     font-weight: bolder;
+}
+#confirm-password{
+    margin-bottom: 50px;
+}
+@media  screen and (max-width: 1100px) {
+    .login{
+        justify-content: space-around;
+        padding: 0;
+    }
+    .register{
+        padding: 0;
+        margin-left: 40px;
+        justify-content: space-around;
+    }
+}
+@media  screen and (max-width: 800px) {
+    .register h3{
+        font-size: 35px;
+    }
+    .showErrorMessage, .hideErrorMessage, .showSuccessMessage, .hideSuccessMessage {
+        left: 20%;
+    }
+    .showErrorMessage,.showSuccessMessage{
+        top: 10%;
+        font-size: 23px;
+        max-width: 60vw;
+    }
+}
+@media  screen and (max-width: 600px) {
+    .register-text h3{
+        font-size: 25px;
+    }
+    .register{
+        margin-left: 0;
+    }
+    .register-form{
+        width: 50%;
+    }
+    .login input{
+        width: 100px;
+    }
+}
+@media  screen and (max-width: 500px) {
+    .register{
+        padding: 0;
+        margin-left: 40px;
+        flex-direction: column;
+    }
+    .register-form{
+        width: 80%;
+        margin-top: 40px;
+    }
+    .login{
+        font-size: 10px;
+        padding: 10px 0;
+    }
+    .login input{
+        font-size: 12px;
+        height: 10px;
+    }
+    .login-btn{
+        font-size: 13px;
+    }
+}
+@media  screen and (max-width: 400px) {
+    .login input{
+        font-size: 10px;
+        width: 80px;
+    }
+    .login-btn{
+        font-size: 10px;
+        padding: 8px;
+    }
+    .login h1{
+        display: none;
+    }
+    .register h1{
+        display: block;
+        color: white;
+        text-align: center;
+    }
+    .register{
+        margin-left: 0;
+    }
 }

@@ -42,6 +42,7 @@ const Register = ({setLogin}) => {
   return (
     <div className="register">
         <div className="register-text">
+          <h1>Linkity</h1>
           <h3>Connect with people</h3>
         </div>
         <form className="register-form" onSubmit={(e)=>register(e)}>

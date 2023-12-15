@@ -33,6 +33,7 @@ const Home = ({user,logout}) => {
         </div>
         <div className="home-mid">
           <NewPost/>
+          <p className="show-recommended">Show recommended users</p>
         </div>
         <div className="home-right">
           <Recommended/>

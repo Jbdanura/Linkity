@@ -67,6 +67,7 @@
 }
 @media  screen and (max-width: 350px) {
     .navbar input{
-        width: 80px;
+        width: 70px;
+        padding: 0;
     }
 }
