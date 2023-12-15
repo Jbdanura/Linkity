@@ -1,8 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import Navbar from './Navbar'
+import NewPost from './NewPost'
+import "./Profile.css"
+import Home from './Home'
 
-const Profile = ({user}) => {
+const Profile = ({user,logout}) => {
   const username = useParams().username
   const [userData,setUserData] = useState([])
   const getUserData = async()=>{
@@ -18,10 +22,16 @@ const Profile = ({user}) => {
     getUserData()
   },[username])
 
-  if(userData.length < 1) return <div>not found</div>
-  
+  if(!user) return null
+  if(userData.username == user.username) return <Home user={user} logout={logout}/>
   return (
-  <div>found {username}</div>
+    <>
+      {(userData.length < 1) ?
+      <Home user={user} logout={logout} notFound={username}/> :
+      <div className="profile-found">
+         <Home user={user} logout={logout} userData={userData}/>
+      </div>}
+    </>
   )
 }
 

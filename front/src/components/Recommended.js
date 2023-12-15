@@ -3,7 +3,7 @@ import "./RecommendedUser.css"
 import axios from "axios"
 import userAvatar from "../images/user.png"
 
-const Recommended = () => {
+const Recommended = ({recommendedModal, setRecommendedModal}) => {
   const [users,setUsers] = useState("")
 
   const getUsers = async() => {
@@ -18,8 +18,9 @@ const Recommended = () => {
   console.log(users)
 
   return (
-    <div className="recommended-container">
+    <div className={recommendedModal ? "recommended-modal-container" : "recommended-container"}>
         <h3>Recommended users</h3>
+        {recommendedModal && <button className="close" onClick={()=>setRecommendedModal(false)}>X</button>}
         <div className="recommended-users">
             {users && users.map(recommendedUser=>{
                 return <div className="recommended-user">

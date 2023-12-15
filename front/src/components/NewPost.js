@@ -7,7 +7,7 @@ const NewPost = () => {
     <div className="new-post">
         <img src={UserIcon}/>
         <div className="new-post-info">
-            <input></input>
+            <input placeholder="Your post here..."></input>
         </div>
     </div>
   )

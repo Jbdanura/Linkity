@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from './Navbar'
 import UserIcon from "../images/user.png"
 import "./Home.css"
 import NewPost from './NewPost'
 import Recommended from './Recommended'
 
-const Home = ({user,logout}) => {
+const Home = ({user,logout,userData,notFound}) => {
+  const [recommendedModal,setRecommendedModal] = useState(false)
+
+  if(!user) return null
 
   return (
     <div>
@@ -32,11 +35,12 @@ const Home = ({user,logout}) => {
           </div>
         </div>
         <div className="home-mid">
-          <NewPost/>
-          <p className="show-recommended">Show recommended users</p>
+          {(!userData && !notFound) && <NewPost/>}
+          {notFound && <p>User "{notFound}" not found</p>}
+          <p className="show-recommended" onClick={()=>setRecommendedModal(true)}>Show recommended users</p>
         </div>
         <div className="home-right">
-          <Recommended/>
+          <Recommended recommendedModal={recommendedModal} setRecommendedModal={setRecommendedModal}/>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter, Routes,Route} from "react-router-dom"
+import {BrowserRouter, Routes,Route, useNavigate} from "react-router-dom"
 import { useState,useEffect } from 'react';
 import HomeUnlogged from "./components/HomeUnlogged"
 import Home from './components/Home';
@@ -22,10 +22,10 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        {!user ? <HomeUnlogged setUser={setUser}/> :
-        <Home user={user} logout={logout}/>}
+        {!user && <HomeUnlogged setUser={setUser}/> }
         <Routes>
-          <Route path="/user/:username" element={<Profile/>}></Route>
+          <Route path="/" element={<Home user={user} logout={logout}/>}></Route>
+          <Route path="/user/:username" element={<Profile user={user} logout={logout}/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>

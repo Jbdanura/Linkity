@@ -18,7 +18,7 @@ const Navbar = ({user,logout}) => {
         <input placeholder="Search..." value={search} onChange={(e)=>setSearch(e.target.value)} onKeyDown={handleKeyDown}/>
         <div className="navbar-right">
             <button className="my-profile" onClick={()=>navigate(`/user/${user.username}`)}>My profile</button>
-            <button className="logout" onClick={()=>logout()}>Logout</button>
+            <button className="logout" onClick={()=>{logout();navigate("/")}}>Logout</button>
         </div>
     </div>
   )

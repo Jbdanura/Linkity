@@ -31,6 +31,42 @@
     height: 40px;
     border: 1px solid rgba(128, 128, 128, 0.562);
 }
+.recommended-modal-container {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(255, 255, 255, 0.959); /* Black w/ opacity */
+  }
+.recommended-modal-container img{
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+}
+.recommended-modal-container h3{
+    text-align: center;
+}
+
+  /* The Close Button */
+  .close {
+    color: #ff0000;
+    border: 1px solid red;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: -50px;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
 @media  screen and (max-width: 800px) {
     .recommended-container{
         background-color: white;

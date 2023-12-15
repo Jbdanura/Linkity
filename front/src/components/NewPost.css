@@ -63,6 +63,7 @@
     }
     .new-post input{
         width: 55vw;
+        font-size: 15px;
     }
 }
 @media  screen and (max-width: 300px) {
