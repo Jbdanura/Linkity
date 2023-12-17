@@ -3,7 +3,9 @@ import {BrowserRouter, Routes,Route, useNavigate} from "react-router-dom"
 import { useState,useEffect } from 'react';
 import HomeUnlogged from "./components/HomeUnlogged"
 import Home from './components/Home';
-import Profile from "./components/Profile"
+import Profile from "./components/Profile";
+import Configuration from "./components/Configuration";
+
 
 function App() {
   const [user,setUser] = useState(null)
@@ -26,6 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home user={user} logout={logout}/>}></Route>
           <Route path="/user/:username" element={<Profile user={user} logout={logout}/>}></Route>
+          <Route path="/configuration" element={<Configuration user={user} logout={logout}/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>

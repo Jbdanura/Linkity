@@ -9,7 +9,7 @@
 .navbar button{
     border: none;
     height: 30px;
-    width: 100px;
+    width: 80px;
     margin-right: 5px;
     border-radius: 5px;
 }
@@ -46,6 +46,10 @@
 .navbar input::placeholder{
     padding-left: 20px;
 }
+.navbar .config{
+    background-color: rgb(209, 159, 49);
+    color: white;
+}
 @media  screen and (max-width: 600px) {
     .navbar input{
         width: 150px;
@@ -54,17 +58,18 @@
         width: 80px;
     }
 }
-@media  screen and (max-width: 400px) {
+@media  screen and (max-width: 500px) {
     .navbar input{
         width: 100px;
     }
     .navbar button{
-        width: 60px;
+        width: 50px;
     }
     .navbar *{
         font-size: 10px;
     }
 }
+
 @media  screen and (max-width: 350px) {
     .navbar input{
         width: 70px;

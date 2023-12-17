@@ -11,15 +11,14 @@ const getToken = async (req,res,next) => {
     try {
         const token = req.header("authorization").substring(7);
         if(!token) return res.status(401).json("Access denied. Please log in");
-        jwt.verify(token,process.env.SECRET,(error,userToken)=>{
-            if(error) return res.status(400).json("Invalid token")
-            const username = userToken.username;
-            User.findOne({username}).then(user=>{
-                req.user = user
-                next()
-            })
-            
-        });
+        const decodedToken = jwt.verify(token,process.env.SECRET)
+        if(!decodedToken.id){
+            return response.status(401).json({error: "token missing or invalid"})
+        }
+        User.findByPk(decodedToken.id).then(user=>{
+            req.user = user
+            next()
+        })
     } catch (error) {
         return res.status(400).json("Token error")
     }
