@@ -22,5 +22,36 @@ postsRouter.post("/new",getToken,async(req,res)=>{
         console.log(error)
     }
 })
-
+postsRouter.post("/edit/:postId",getToken,async(req,res)=>{
+    try {
+        const user = req.user
+        const postId = req.params.postId
+        const post = await Post.findByPk(postId,{include:User})
+        if(post.user.id == user.id){
+            post.content = req.body.editPostContent
+            await post.save()
+            return res.status(200).send("Post saved")
+        } else{
+            return res.status(400).send("You are not the owner of that post")
+        }
+    } catch (error) {
+        console.log(error)
+    }
+})
+postsRouter.delete("/:postId",getToken,async(req,res)=>{
+    try {
+        const user = req.user
+        const postId = req.params.postId
+        const post = await Post.findByPk(postId,{include:User})
+        if(post.user.id == user.id){
+            post.content = req.body.postContent
+            await post.destroy()
+            return res.status(200).send("Post deleted")
+        } else{
+            return res.status(400).send("You are not the owner of that post")
+        }
+    } catch (error) {
+        console.log(error)
+    }
+})
 module.exports = postsRouter

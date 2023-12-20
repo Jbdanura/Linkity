@@ -9,6 +9,8 @@ const User = require("./models/user.js")
 const Post = require("./models/post.js")
 const rateLimit = require("express-rate-limit")
 
+app.use(cors())
+
 connect()
 
 const modelsSync = () => {
@@ -26,16 +28,15 @@ const modelsSync = () => {
   
 modelsSync()
 
-
 const limiter = rateLimit({
-	windowMs: 15 * 60 * 1000,
-	limit: 100,
+	windowMs: 15 * 60 * 10000,
+	limit: 1000,
 	standardHeaders: 'draft-7', 
 	legacyHeaders: false, 
 })
 
 app.use(limiter)
-app.use(cors())
+
 app.use(bodyParser.json())
 
 app.listen(777,()=>{

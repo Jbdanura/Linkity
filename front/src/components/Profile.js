@@ -24,13 +24,11 @@ const Profile = ({user,logout}) => {
   if(!user) return null
 
   return (
-    <>
-      {(userData.length < 1) ?
-      navigate("/not-found"):
       <div className="profile-found">
-         <Home user={user} logout={logout} userData={userData}/>
-      </div>}
-    </>
+         {userData ? <Home user={user} logout={logout} userData={userData}/> 
+         : <Home user={user} logout={logout} notFound={true}/>
+         }
+      </div>
   )
 }
 

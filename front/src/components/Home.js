@@ -8,11 +8,6 @@ import Post from './Post'
 
 const Home = ({user,logout,userData}) => {
   const [recommendedModal,setRecommendedModal] = useState(false)
-  const addPost = (post) => {
-    if(userData){
-      userData.posts.push(post)
-    }
-  }
 
   if(!user) return null
 
@@ -43,11 +38,11 @@ const Home = ({user,logout,userData}) => {
         </div>
         <div className="home-mid">
           {!userData && <NewPost user={user}/>}
-          {(userData && userData.username == user.username) && <NewPost user={user} addPost={addPost}/>}
+          {(userData && userData.username == user.username) && <NewPost user={user}/>}
           <p className="show-recommended" onClick={()=>setRecommendedModal(true)}>Show recommended users</p>
           <div className="posts-container">
-          {(userData && userData.posts.length > 0) && userData.posts.slice(0).reverse().map(post=>{
-            return <Post post={post} userData={userData}/>
+          {(userData && userData.posts && userData.posts.length > 0) && userData.posts.slice(0).reverse().map(post=>{
+            return <Post post={post} userData={userData} user={user}/>
           })}
           </div>
         </div>

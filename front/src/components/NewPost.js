@@ -3,7 +3,7 @@ import "./NewPost.css"
 import UserIcon from "../images/user.png"
 import axios from "axios"
 
-const NewPost = ({user,addPost}) => {
+const NewPost = ({user}) => {
   const [content,setContent] = useState("")
   const [errorMessage,setErrorMessage] = useState("")
   const [successMessage,setSuccessMessage] = useState("")
@@ -14,10 +14,10 @@ const NewPost = ({user,addPost}) => {
         const post = await axios.post("http://localhost:777/posts/new",{content},{headers:{"Authorization":`Bearer ${user.token}`}})
         setSuccessMessage("Published post")
         setContent("")
-        addPost(post)
         setInterval(()=>{
           setSuccessMessage(null)
-        },2000)
+          window.location.reload()
+        },1000)
     } catch (error) {
         if(error.response.data){
           setErrorMessage(error.response.data)
