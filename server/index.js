@@ -7,6 +7,7 @@ const cors = require('cors')
 const bodyParser = require("body-parser")
 const User = require("./models/user.js")
 const Post = require("./models/post.js")
+const rateLimit = require("express-rate-limit")
 
 connect()
 
@@ -22,8 +23,18 @@ const modelsSync = () => {
       console.log(error)
     }
   }
+  
 modelsSync()
 
+
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000,
+	limit: 100,
+	standardHeaders: 'draft-7', 
+	legacyHeaders: false, 
+})
+
+app.use(limiter)
 app.use(cors())
 app.use(bodyParser.json())
 

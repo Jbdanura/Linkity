@@ -1,10 +1,24 @@
-.post-container{
-    width: 50%;
-    background-color: rgb(230, 230, 230);
-    padding: 10px;
-    margin: 10px 0;
+.posts-container{
+    margin-top: 20px;
+}
+.post{
+    background-color: white;
+    padding: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.562);
 }
 .post-info{
     display: flex;
-    justify-content: space-between;
+}
+.post-icon{
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.719);
+    margin-left: 10px;
+}
+.post-info p{
+    margin-left: 20px;
+    font-weight: bolder;
+}
+.post-content p{
+    margin-left: 10px;
 }

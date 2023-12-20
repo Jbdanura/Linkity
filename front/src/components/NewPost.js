@@ -1,15 +1,42 @@
-import React from 'react'
+import React,{useState} from 'react'
 import "./NewPost.css"
 import UserIcon from "../images/user.png"
+import axios from "axios"
 
-const NewPost = () => {
+const NewPost = ({user,addPost}) => {
+  const [content,setContent] = useState("")
+  const [errorMessage,setErrorMessage] = useState("")
+  const [successMessage,setSuccessMessage] = useState("")
+
+  const createPost = async (e) => {
+    try {
+        e.preventDefault()
+        const post = await axios.post("http://localhost:777/posts/new",{content},{headers:{"Authorization":`Bearer ${user.token}`}})
+        setSuccessMessage("Published post")
+        setContent("")
+        addPost(post)
+        setInterval(()=>{
+          setSuccessMessage(null)
+        },2000)
+    } catch (error) {
+        if(error.response.data){
+          setErrorMessage(error.response.data)
+          setInterval(()=>{
+            setErrorMessage(null)
+          },2500)
+        }
+    }
+  }
+
   return (
-    <div className="new-post">
+    <form className="new-post" onSubmit={(e)=>createPost(e)}>
+        <h2 className={errorMessage  ? 'showErrorMessage' : 'hideErrorMessage'}>{errorMessage}</h2>
+        <h2 className={successMessage  ? 'showSuccessMessage' : 'hideSuccessMessage'}>{successMessage}</h2>
         <img src={UserIcon}/>
         <div className="new-post-info">
-            <input placeholder="Your post here..."></input>
+            <input placeholder="Your post here..." onChange={(e)=>setContent(e.target.value)} value={content}></input>
         </div>
-    </div>
+    </form>
   )
 }
 

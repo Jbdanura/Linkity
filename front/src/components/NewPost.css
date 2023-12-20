@@ -1,7 +1,6 @@
 .new-post{
     background-color: rgba(137, 43, 226, 0.281);
     padding: 20px;
-    width: 50vw;
     display: flex;
     align-items: center;
 }
@@ -9,10 +8,10 @@
     width: 50px;
     border-radius: 15px;
     margin-right: 15px;
-    margin-left: 30px;
+    margin-left: 5px;
 }
 .new-post input{
-    width: 40vw;
+    width: 38vw;
     height: 40px;
     border-radius: 15px;
     border: 1px solid rgb(134, 103, 182);
@@ -20,21 +19,11 @@
     padding-left: 30px;
     color: rgb(77, 51, 117);
 }
-@media  screen and (max-width: 1300px) {
-    .new-post{
-        width: 45vw;
-    }
-    .new-post input{
-        width: 32vw;
-    }
-}
+
 @media  screen and (max-width: 1000px) {
-    .new-post{
-        width: 40vw;
-    }
     .new-post input{
-        width: 25vw;
         font-size: 20px;
+        width: 30vw;
         padding-left: 20px;
     }
     .new-post img{
@@ -43,32 +32,24 @@
 }
 @media  screen and (max-width: 700px) {
     .new-post{
-        width: 88vw;
         padding: 10px;
     }
     .new-post input{
-        width: 70vw;
         font-size: 20px;
         padding-left: 20px;
+        width: 70vw;
     }
     .new-post img{
         margin-left: 0px;
     }
 }
 
-@media  screen and (max-width: 400px) {
+@media  screen and (max-width: 500px) {
     .new-post{
-        width: 80vw;
         margin: 0;
     }
     .new-post input{
-        width: 55vw;
+        width: 60vw;
         font-size: 15px;
-    }
-}
-@media  screen and (max-width: 300px) {
-    .new-post{
-        width: 85vw;
-        padding: 10px;
     }
 }

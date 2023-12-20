@@ -1,12 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import UserIcon from "../images/user.png"
 import "./Home.css"
-import NewPost from './NewPost'
 import Recommended from './Recommended'
+import NewPost from './NewPost'
+import Post from './Post'
 
-const Home = ({user,logout,userData,notFound}) => {
+const Home = ({user,logout,userData}) => {
   const [recommendedModal,setRecommendedModal] = useState(false)
+  const addPost = (post) => {
+    if(userData){
+      userData.posts.push(post)
+    }
+  }
 
   if(!user) return null
 
@@ -17,7 +23,8 @@ const Home = ({user,logout,userData,notFound}) => {
         <div className="home-left">
           <div className="left-head">
             <img src={UserIcon}></img>
-            <p>@{user.username}</p>
+            {userData ? <p>@{userData.username}</p> :
+            <p>@{user.username}</p>}
           </div>
           <div className="left-info">
             <div className="posts">
@@ -35,9 +42,14 @@ const Home = ({user,logout,userData,notFound}) => {
           </div>
         </div>
         <div className="home-mid">
-          {(!userData && !notFound) && <NewPost/>}
-          {notFound && <p>User "{notFound}" not found</p>}
+          {!userData && <NewPost user={user}/>}
+          {(userData && userData.username == user.username) && <NewPost user={user} addPost={addPost}/>}
           <p className="show-recommended" onClick={()=>setRecommendedModal(true)}>Show recommended users</p>
+          <div className="posts-container">
+          {(userData && userData.posts.length > 0) && userData.posts.slice(0).reverse().map(post=>{
+            return <Post post={post} userData={userData}/>
+          })}
+          </div>
         </div>
         <div className="home-right">
           <Recommended recommendedModal={recommendedModal} setRecommendedModal={setRecommendedModal}/>

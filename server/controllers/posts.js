@@ -7,6 +7,7 @@ postsRouter.get("/all",async(req,res)=>{
     const posts = await Post.findAll({include:[{model:User,attributes:["username"]}]})
     return res.status(200).json(posts)
 })
+
 postsRouter.post("/new",getToken,async(req,res)=>{
     try {
         const user = req.user
@@ -20,6 +21,6 @@ postsRouter.post("/new",getToken,async(req,res)=>{
     } catch (error) {
         console.log(error)
     }
-
 })
+
 module.exports = postsRouter

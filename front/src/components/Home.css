@@ -41,10 +41,18 @@
 }
 .home-mid{
     margin-left: 50px;
+    width: 50vw;
 }
 .home-mid .show-recommended{
     display: none;
 }
+
+@media  screen and (max-width: 700px) {
+    .home-mid{
+        width: 90vw;
+    }
+}
+
 @media  screen and (max-width: 1300px) {
     .home-container{
         margin-left: 20px;

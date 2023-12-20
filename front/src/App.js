@@ -5,6 +5,7 @@ import HomeUnlogged from "./components/HomeUnlogged"
 import Home from './components/Home';
 import Profile from "./components/Profile";
 import Configuration from "./components/Configuration";
+import NotFound from './components/NotFound';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         {!user && <HomeUnlogged setUser={setUser}/> }
         <Routes>
           <Route path="/" element={<Home user={user} logout={logout}/>}></Route>
+          <Route path="/not-found" element={<NotFound user={user} logout={logout}/>}></Route>
           <Route path="/user/:username" element={<Profile user={user} logout={logout}/>}></Route>
           <Route path="/configuration" element={<Configuration user={user} logout={logout}/>}></Route>
         </Routes>

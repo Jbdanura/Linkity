@@ -1,22 +1,17 @@
 import React from 'react'
 import "./Post.css"
+import UserIcon from "../images/user.png"
 
-
-const Post = ({post}) => {
+const Post = ({post,userData}) => {
   return (
-    <div className="post-container">
-        <div className="post-info">
-          {console.log(post)}
-          <div className="post-info-left">
-          {post.user.username}
-          </div>
-          <div className="post-info-right">
-            {post.createdAt.splice(0,12)}
-          </div>
-        </div>
-        <div className="post-description">
-          description
-        </div>
+    <div className="post">
+      <div className="post-info">
+        <img className="post-icon" src={UserIcon}/>
+        <p>{userData.username}</p>
+      </div>
+      <div className="post-content">
+        <p>{post.content}</p>
+      </div>
     </div>
   )
 }

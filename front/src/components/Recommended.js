@@ -15,7 +15,6 @@ const Recommended = ({recommendedModal, setRecommendedModal}) => {
     getUsers()
   },[])
 
-  console.log(users)
 
   return (
     <div className={recommendedModal ? "recommended-modal-container" : "recommended-container"}>

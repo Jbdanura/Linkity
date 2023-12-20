@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs")
 require('dotenv').config({ path: './secret/.env' })
 const jwt = require("jsonwebtoken")
 const getToken = require("../middleware/token.js")
+const Post = require("../models/post.js")
 
 usersRouter.get("/",async(req,res)=>{
     return res.status(200).send("e")
@@ -53,7 +54,7 @@ usersRouter.post("/login",async(req,res)=>{
 usersRouter.get("/user/:username",async(req,res)=>{
     try {
         const username = req.params.username
-        const user = await User.findOne({where:{username},attributes:["username","id"]})
+        const user = await User.findOne({where:{username},attributes:["username","id"],include:Post})
         return res.status(200).send(user)
     } catch (error) {
         return res.status(400).send(error)
@@ -62,7 +63,7 @@ usersRouter.get("/user/:username",async(req,res)=>{
 
 usersRouter.get("/recommended",async(req,res)=>{
     try {
-        const users = await User.findAll({limit: 7,attributes:["username","id"]})
+        const users = await User.findAll({limit: 6,attributes:["username","id"]})
         return res.status(200).send(users)
     } catch (error) {
         return res.status(400).send(error) 
