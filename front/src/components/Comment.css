@@ -1,0 +1,35 @@
+.comment-container input{
+    width: 93%;
+    height: 30px;
+    font-size: 15px;
+    border: 1px solid grey;
+}
+.comment-container button{
+    width: 5%;
+    height: 36px;
+    background-color: green;
+    border: none;
+    color: white;
+}
+.comment-container{
+    border-top: 1px solid rgba(0, 0, 0, 0.267);
+}
+.comment-container h3{
+    font-style: italic;
+    font-weight: 300;
+}
+.comment-container button:hover{
+    cursor: pointer;
+}
+@media screen and (max-width: 1000px){
+    .comment-container input{
+        width: 80%;
+        height: 30px;
+        font-size: 15px;
+        border: 1px solid grey;
+    }
+    .comment-container button{
+        width: 15%;
+        height: 34px;
+    }
+}

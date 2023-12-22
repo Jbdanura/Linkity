@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import "./Post.css"
 import UserIcon from "../images/user.png"
 import { useNavigate } from 'react-router-dom'
 import axios from "axios"
+import Comment from './Comment'
+import Comments from './Comments'
 
-const Post = ({post,userData,user}) => {
+const Post = ({post,user}) => {
   const [editPost,setEditPost] = useState(false)
   const [editPostContent,setEditPostContent] = useState(post.content)
   const navigate = useNavigate()
@@ -26,13 +28,14 @@ const Post = ({post,userData,user}) => {
       
     }
   }
+
   return (
     <div className="post">
       <div className="post-info">
         <img className="post-icon" src={UserIcon}/>
-        <p onClick={()=>navigate(`/user/${userData.username}`)}>{userData.username}</p>
+        <p onClick={()=>navigate(`/user/${post.username}`)}>{post.username}</p>
         <div class="clearfix"></div>
-        {userData.username == user.username && <div className="post-config">
+        {post.username == user.username && <div className="post-config">
           <button className="edit-post" onClick={()=>setEditPost(!editPost)}>Edit</button>
           <button className="delete-post" onClick={()=>doDeletePost()}>Delete</button>
         </div>}
@@ -43,6 +46,8 @@ const Post = ({post,userData,user}) => {
         <p>{post.content}</p>
         }
       </div>
+      <Comment user={user} post={post}/>
+      <Comments user={user} post={post}/>
     </div>
   )
 }

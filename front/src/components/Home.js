@@ -6,7 +6,7 @@ import Recommended from './Recommended'
 import NewPost from './NewPost'
 import Post from './Post'
 
-const Home = ({user,logout,userData}) => {
+const Home = ({user,logout,userData,notFound}) => {
   const [recommendedModal,setRecommendedModal] = useState(false)
 
   if(!user) return null
@@ -37,17 +37,18 @@ const Home = ({user,logout,userData}) => {
           </div>
         </div>
         <div className="home-mid">
-          {!userData && <NewPost user={user}/>}
-          {(userData && userData.username == user.username) && <NewPost user={user}/>}
+          {(!userData && !notFound) && <NewPost user={user}/>}
+          {notFound && <p className="not-found">User not found</p>}
           <p className="show-recommended" onClick={()=>setRecommendedModal(true)}>Show recommended users</p>
+          {(userData && userData.username == user.username) && <NewPost user={user}/>}
           <div className="posts-container">
           {(userData && userData.posts && userData.posts.length > 0) && userData.posts.slice(0).reverse().map(post=>{
-            return <Post post={post} userData={userData} user={user}/>
+            return <Post post={post} user={user}/>
           })}
           </div>
         </div>
         <div className="home-right">
-          <Recommended recommendedModal={recommendedModal} setRecommendedModal={setRecommendedModal}/>
+          <Recommended recommendedModal={recommendedModal} setRecommendedModal={setRecommendedModal} user={user}/>
         </div>
       </div>
     </div>

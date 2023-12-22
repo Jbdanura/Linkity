@@ -3,7 +3,7 @@ import "./RecommendedUser.css"
 import axios from "axios"
 import userAvatar from "../images/user.png"
 
-const Recommended = ({recommendedModal, setRecommendedModal}) => {
+const Recommended = ({recommendedModal, setRecommendedModal,user}) => {
   const [users,setUsers] = useState("")
 
   const getUsers = async() => {
@@ -22,6 +22,7 @@ const Recommended = ({recommendedModal, setRecommendedModal}) => {
         {recommendedModal && <button className="close" onClick={()=>setRecommendedModal(false)}>X</button>}
         <div className="recommended-users">
             {users && users.map(recommendedUser=>{
+                if(recommendedUser.username == user.username) return null
                 return <div className="recommended-user">
                     <div className="recommended-user-info">
                         <img src={userAvatar}/>

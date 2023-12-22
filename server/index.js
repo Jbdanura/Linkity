@@ -7,7 +7,9 @@ const cors = require('cors')
 const bodyParser = require("body-parser")
 const User = require("./models/user.js")
 const Post = require("./models/post.js")
+const Comment = require("./models/comment.js")
 const rateLimit = require("express-rate-limit")
+const {sequelize} = require("./db.js")
 
 app.use(cors())
 
@@ -19,8 +21,14 @@ const modelsSync = () => {
         foreignKey:"userId"
       })
       Post.belongsTo(User)
-      User.sync({alter:true})
-      Post.sync({alter:true})
+      User.hasMany(Comment,{
+        foreignKey:"userId"
+      })
+      Post.hasMany(Comment,{
+        foreignKey:"postId"
+      })
+      Comment.belongsTo(User)
+      Comment.belongsTo(Post)
     } catch (error) {
       console.log(error)
     }

@@ -5,6 +5,7 @@ require('dotenv').config({ path: './secret/.env' })
 const jwt = require("jsonwebtoken")
 const getToken = require("../middleware/token.js")
 const Post = require("../models/post.js")
+const Comment = require("../models/comment.js")
 
 usersRouter.get("/",async(req,res)=>{
     return res.status(200).send("e")
@@ -54,7 +55,8 @@ usersRouter.post("/login",async(req,res)=>{
 usersRouter.get("/user/:username",async(req,res)=>{
     try {
         const username = req.params.username
-        const user = await User.findOne({where:{username},attributes:["username","id"],include:Post})
+        const user = await User.findOne({where:{username},attributes:["username","id"],
+        include:[{model:Post,include:[{model:Comment,include:{model:User,attributes:["username"]}}]}]})
         return res.status(200).send(user)
     } catch (error) {
         return res.status(400).send(error)

@@ -46,7 +46,9 @@
 .home-mid .show-recommended{
     display: none;
 }
-
+.not-found{
+    font-size: 30px;
+}
 @media  screen and (max-width: 700px) {
     .home-mid{
         width: 90vw;
@@ -86,11 +88,15 @@
     }
 }
 @media  screen and (max-width: 700px) {
-    .home-left{
-        display: none;
-    }
     .home-mid{
         margin: 0;
+    }
+    .home-container{
+        display: block;
+    }
+    .home-left{
+        width: 60vw;
+        margin-left: 15vw;
     }
     .home-mid .show-recommended{
         display: block;
@@ -101,9 +107,17 @@
     }
 
 }
+@media  screen and (max-width: 500px) {
+    .home-mid{
+        width: 98vw;
+    }
+    .home-container{
+        margin-left: 5px;
+    }
+}
+
 @media  screen and (max-width: 350px) {
     .home-container{
         margin-top: 10px;
-        margin-left: 10px;
     }
 }

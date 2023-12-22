@@ -33,6 +33,7 @@
 @media  screen and (max-width: 700px) {
     .new-post{
         padding: 10px;
+        margin-top: 10px;
     }
     .new-post input{
         font-size: 20px;
@@ -47,6 +48,7 @@
 @media  screen and (max-width: 500px) {
     .new-post{
         margin: 0;
+        margin-top: 10px;
     }
     .new-post input{
         width: 60vw;

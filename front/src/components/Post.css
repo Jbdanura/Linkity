@@ -5,6 +5,7 @@
     background-color: white;
     padding: 20px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.562);
+    margin-bottom: 10px;
 }
 .post-info{
     display: flex;
@@ -22,6 +23,7 @@
 }
 .post-content p{
     margin-left: 10px;
+    margin-bottom: 50px;
 }
 .post-config{
     position: absolute;
