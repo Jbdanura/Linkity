@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react'
 import "./RecommendedUser.css"
 import axios from "axios"
 import userAvatar from "../images/user.png"
+import { useNavigate } from 'react-router-dom'
 
 const Recommended = ({recommendedModal, setRecommendedModal,user}) => {
   const [users,setUsers] = useState("")
+  const navigate = useNavigate()
 
   const getUsers = async() => {
     const data = await axios.get("http://localhost:777/users/recommended")
@@ -26,7 +28,7 @@ const Recommended = ({recommendedModal, setRecommendedModal,user}) => {
                 return <div className="recommended-user">
                     <div className="recommended-user-info">
                         <img src={userAvatar}/>
-                        <h4>@{recommendedUser.username}</h4>
+                        <h4 onClick={()=>navigate(`/user/${recommendedUser.username}`)}>@{recommendedUser.username}</h4>
                     </div>
                     <button>Follow</button>
                 </div>

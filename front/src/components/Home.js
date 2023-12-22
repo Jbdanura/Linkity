@@ -5,9 +5,26 @@ import "./Home.css"
 import Recommended from './Recommended'
 import NewPost from './NewPost'
 import Post from './Post'
+import axios from 'axios'
 
 const Home = ({user,logout,userData,notFound}) => {
   const [recommendedModal,setRecommendedModal] = useState(false)
+  const [showAllPosts,setShowAllPosts] = useState(true)
+  const [homePosts,setHomePosts] = useState(null)
+
+  const getPosts = async () =>{
+    try {
+      if(showAllPosts){
+          const result = await axios.get("http://localhost:777/posts/all")  
+          setHomePosts(result.data)
+      } else{
+          const result = await axios.get(`http://localhost:777/posts/all/following/${user.username}`)
+          setHomePosts(result.data)
+        }
+      } catch (error) {}
+  }
+
+  useEffect(()=>{getPosts()},[showAllPosts])
 
   if(!user) return null
 
@@ -42,9 +59,22 @@ const Home = ({user,logout,userData,notFound}) => {
           <p className="show-recommended" onClick={()=>setRecommendedModal(true)}>Show recommended users</p>
           {(userData && userData.username == user.username) && <NewPost user={user}/>}
           <div className="posts-container">
-          {(userData && userData.posts && userData.posts.length > 0) && userData.posts.slice(0).reverse().map(post=>{
+          {(userData && userData.posts && userData.posts.length > 0) ? userData.posts.map(post=>{
             return <Post post={post} user={user}/>
-          })}
+          }) :
+            <div className="posts-home-container">
+              {(!notFound && !userData) && <div className="posts-home">
+                <select className="select-display" onChange={(e) => {setShowAllPosts(e.target.value);console.log(showAllPosts)}}>
+                  <option value={true}>Show all posts</option>
+                  <option value={false}>Show only following posts</option>
+                </select>
+                <div className="posts-home-show">
+                  {(homePosts && homePosts.length > 0) && homePosts.map(homePost=>{
+                    return <Post post={homePost} user={user}/>
+                  })}
+                </div>
+              </div>}
+            </div>}
           </div>
         </div>
         <div className="home-right">

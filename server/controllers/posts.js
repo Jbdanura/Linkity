@@ -5,8 +5,31 @@ const Comment = require("../models/comment.js")
 const getToken = require("../middleware/token.js")
 
 postsRouter.get("/all",async(req,res)=>{
+    const posts = await Post.findAll({
+        include: [
+          {
+            model: User,
+            attributes: ["username"],
+          },
+          {
+            model: Comment,
+            include: [
+              {
+                model: User,
+                attributes: ["username"],
+              },
+            ],
+          },
+        ],
+        order: [["createdAt", "DESC"]]
+      });
+    return res.status(200).json(posts)
+})
+
+postsRouter.get("/all/following/:username",async(req,res)=>{
     const posts = await Post.findAll({include:[{model:User,attributes:["username"]}]})
     return res.status(200).json(posts)
+    /*change this*/
 })
 
 postsRouter.post("/new",getToken,async(req,res)=>{

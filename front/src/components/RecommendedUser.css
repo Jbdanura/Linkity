@@ -49,6 +49,9 @@
 .recommended-modal-container h3{
     text-align: center;
 }
+.recommended-user-info h4:hover{
+    cursor: pointer;
+}
 
   /* The Close Button */
   .close {

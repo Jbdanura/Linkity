@@ -56,7 +56,7 @@ usersRouter.get("/user/:username",async(req,res)=>{
     try {
         const username = req.params.username
         const user = await User.findOne({where:{username},attributes:["username","id"],
-        include:[{model:Post,include:[{model:Comment,include:{model:User,attributes:["username"]}}]}]})
+        include:[{model:Post,include:[{model:Comment,include:{model:User,attributes:["username"]}}]}],order: [[Post, "createdAt", "DESC"]],})
         return res.status(200).send(user)
     } catch (error) {
         return res.status(400).send(error)

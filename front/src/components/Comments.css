@@ -8,6 +8,7 @@
 }
 .comments-container{
     margin: 5px;
+    padding-top: 30px;
 }
 .comment-user:hover{
     cursor: pointer;
