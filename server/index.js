@@ -8,8 +8,8 @@ const bodyParser = require("body-parser")
 const User = require("./models/user.js")
 const Post = require("./models/post.js")
 const Comment = require("./models/comment.js")
+const Follow = require("./models/follow.js")
 const rateLimit = require("express-rate-limit")
-const {sequelize} = require("./db.js")
 
 app.use(cors())
 
@@ -29,6 +29,10 @@ const modelsSync = () => {
       })
       Comment.belongsTo(User)
       Comment.belongsTo(Post)
+      User.belongsToMany(User,{through:Follow, as:"following", foreignKey:"followingId"})
+      User.belongsToMany(User,{through:Follow, as:"follower", foreignKey:"followerId"})
+      Follow.belongsTo(User, { as: 'follower', foreignKey: 'followerId' });
+      Follow.belongsTo(User, { as: 'following', foreignKey: 'followingId' });
     } catch (error) {
       console.log(error)
     }

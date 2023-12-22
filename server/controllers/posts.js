@@ -2,6 +2,7 @@ const postsRouter = require("express").Router()
 const User = require("../models/user.js")
 const Post = require("../models/post.js")
 const Comment = require("../models/comment.js")
+const Follow = require("../models/follow.js")
 const getToken = require("../middleware/token.js")
 
 postsRouter.get("/all",async(req,res)=>{
@@ -27,9 +28,23 @@ postsRouter.get("/all",async(req,res)=>{
 })
 
 postsRouter.get("/all/following/:username",async(req,res)=>{
-    const posts = await Post.findAll({include:[{model:User,attributes:["username"]}]})
-    return res.status(200).json(posts)
-    /*change this*/
+    const user = await User.findOne({where:{username:req.params.username}})
+    const follows = await Follow.findAll({
+        where: { followerId: user.id },
+    });
+
+    const followingIds = follows.map((follow) => follow.followingId);
+
+    const posts = await Post.findAll({
+        include: [
+        {
+            model: User,
+            where: { id: followingIds },
+        },
+        ],
+        limit: page * limit,
+    });
+    return res.status(200).send(posts)
 })
 
 postsRouter.post("/new",getToken,async(req,res)=>{

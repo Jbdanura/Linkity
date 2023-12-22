@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken")
 const getToken = require("../middleware/token.js")
 const Post = require("../models/post.js")
 const Comment = require("../models/comment.js")
+const Follow = require("../models/follow.js")
 
 usersRouter.get("/",async(req,res)=>{
     return res.status(200).send("e")
@@ -97,5 +98,25 @@ usersRouter.post("/changePassword", getToken, async(req,res)=>{
     }
 })
 
+usersRouter.post("/follow",getToken,async(req,res)=>{
+    try {
+        const user = req.user
+        const userToFollow = await User.findOne({where: {username:req.body.userToFollow}})
+        const alreadyFollowing = await Follow.findOne({where:{followingId:userToFollow.id, followerId:user.id}})
+        console.log(userToFollow,user,alreadyFollowing)
+        if(alreadyFollowing){
+            await alreadyFollowing.destroy()
+            return res.status(200).send(false)
+        }
+        const follow = await Follow.create({followingId: userToFollow.id, followerId: user.id})
+        if(follow){
+            return res.status(200).send(true)
+        }
+    } catch (error) {
+        console.log(error)
+        return res.status(400).send(error)
+    }
+    
+})
 
 module.exports = usersRouter

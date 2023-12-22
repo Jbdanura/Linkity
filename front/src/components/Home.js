@@ -52,6 +52,7 @@ const Home = ({user,logout,userData,notFound}) => {
               <p className="number">420</p>
             </div>
           </div>
+          {userData && <button className="left-head-follow">Follow</button>}
         </div>
         <div className="home-mid">
           {(!userData && !notFound) && <NewPost user={user}/>}
