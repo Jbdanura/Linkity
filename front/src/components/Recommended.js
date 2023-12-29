@@ -30,7 +30,6 @@ const Recommended = ({recommendedModal, setRecommendedModal,user}) => {
                         <img src={userAvatar}/>
                         <h4 onClick={()=>navigate(`/user/${recommendedUser.username}`)}>@{recommendedUser.username}</h4>
                     </div>
-                    <button>Follow</button>
                 </div>
             })}
         </div>

@@ -21,7 +21,7 @@ function App() {
       setUser(foundUser)
     }
   },[])
-  console.log(user)
+
   return (
     <div className="App">
       <BrowserRouter>

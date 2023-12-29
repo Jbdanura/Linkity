@@ -17,7 +17,7 @@ const Comments = ({user,post}) => {
 
   return (
     <div className="comments-container">
-        {post.Comments.length > 0 && post.Comments.map(comment=>{
+        {post.Comments && post.Comments.length > 0 && post.Comments.map(comment=>{
             const commentId = comment.id
             return <div className="comment">
                 <p className="comment-user" onClick={()=>navigate(`/user/${comment.user.username}`)}>@{comment.user.username}</p>

@@ -27,26 +27,42 @@ postsRouter.get("/all",async(req,res)=>{
     return res.status(200).json(posts)
 })
 
-postsRouter.get("/all/following/:username",async(req,res)=>{
-    const user = await User.findOne({where:{username:req.params.username}})
-    const follows = await Follow.findAll({
-        where: { followerId: user.id },
-    });
+postsRouter.get("/all/following/:username", async (req, res) => {
+    try {
+        const user = await User.findOne({ where: { username: req.params.username } });
 
-    const followingIds = follows.map((follow) => follow.followingId);
+        if (!user) {
+            return res.status(404).send({ message: "User not found" });
+        }
 
-    const posts = await Post.findAll({
-        include: [
-        {
-            model: User,
-            where: { id: followingIds },
-        },
-        ],
-        limit: page * limit,
-    });
-    return res.status(200).send(posts)
-})
+        const follows = await Follow.findAll({
+            where: { followerId: user.id },
+        });
 
+        const followingIds = follows.map((follow) => follow.followingId);
+
+        const posts = await Post.findAll({
+            include: [
+                {
+                    model: User,
+                    where: { id: followingIds },
+                },
+                {
+                    model: Comment,
+                    include: {
+                        model: User,
+                        attributes: ["username"],
+                    },
+                },
+            ],
+            order: [["createdAt", "DESC"]],
+        });
+
+        return res.status(200).send(posts);
+    } catch (error) {
+        return res.status(400)
+    }
+});
 postsRouter.post("/new",getToken,async(req,res)=>{
     try {
         const user = req.user

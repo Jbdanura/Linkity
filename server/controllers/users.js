@@ -66,10 +66,54 @@ usersRouter.get("/user/:username",async(req,res)=>{
 
 usersRouter.get("/recommended",async(req,res)=>{
     try {
-        const users = await User.findAll({limit: 6,attributes:["username","id"]})
+        const users = await User.findAll({limit: 15,attributes:["username","id"]})
         return res.status(200).send(users)
     } catch (error) {
         return res.status(400).send(error) 
+    }
+
+})
+
+usersRouter.get("/followInfo/:username",async(req,res)=>{
+    try {
+        const username = req.params.username
+        console.log(username)
+        const user = await User.findOne({where:{username}})
+        const following = await Follow.findAll({
+            where:{followerId:user.id},
+            include:[{
+                model: User,
+                as:"following",
+                attributes:["username"]
+            }],
+        })
+        const followers = await Follow.findAll({
+            where:{followingId:user.id},
+            include:[{
+                model: User,
+                as:"follower",
+                attributes:["username"]
+            }],
+            
+        })
+        return res.status(200).json({following,followers})  
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+usersRouter.post("/followingState",async(req,res)=>{
+    try {
+        const following = await User.findOne({where: {username:req.body.following}})
+        const follower = await User.findOne({where: {username:req.body.follower}})
+        const follow = await Follow.findOne({where:{followingId:following.id, followerId:follower.id}})
+        if(follow){
+            return res.status(200).send(true)
+        } else{
+            return res.status(200).send(false)
+        } 
+    } catch (error) {
+        console.log(error)
     }
 
 })
@@ -110,13 +154,12 @@ usersRouter.post("/follow",getToken,async(req,res)=>{
         }
         const follow = await Follow.create({followingId: userToFollow.id, followerId: user.id})
         if(follow){
-            return res.status(200).send(true)
+            return res.status(200).send(follow)
         }
     } catch (error) {
         console.log(error)
         return res.status(400).send(error)
     }
-    
 })
 
 module.exports = usersRouter

@@ -52,13 +52,83 @@
 .select-display{
     margin-bottom: 20px;
 }
-.left-head-follow{
+.left-head-follow,.left-head-unfollow{
     margin: 20px;
     height: 30px;
-    width: 60px;
+    width: 70px;
     color: white;
     background-color: green;
+    font-weight: bolder;
 }
+.left-head-unfollow{
+    color: green;
+    background-color: white;
+    border: 1px solid green;
+}
+.modal-home {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(182, 182, 182, 0.637); /* Black w/ opacity */
+  }
+  
+  /* Modal content */
+  .modal-home-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff; /* White background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-width: 400px; /* Adjust the width as needed */
+    width: 100%;
+  }
+  .modal-home img{
+    width: 40px;
+    height: 40px;
+    border: 1px solid grey;
+  }
+  .modal-home-follower,.modal-home-following{
+    display: flex;
+  }
+  .modal-home h4{
+    margin-left: 15px;
+  }
+  /* Close button */
+  .modal-home-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  /* Hover effect for close button */
+  .modal-home-close:hover {
+    color: #555;
+  }
+  
+  /* Modal header */
+  .modal-home-content h2 {
+    margin-top: 0;
+  }
+  
+  /* Modal body (follower/following list) */
+  .modal-home-content div {
+    margin-bottom: 10px;
+  }
+  .followers:hover,.following:hover{
+    cursor: pointer;
+  }
+  .modal-home-follower:hover{
+    cursor: pointer;
+  }
 @media  screen and (max-width: 700px) {
     .home-mid{
         width: 90vw;
@@ -96,6 +166,11 @@
     .home-left .left-info{
         font-size: 16px;
     }
+      /* Modal content */
+      .modal-home-content {
+        max-width: 90%;
+        top: 60%;
+      }
 }
 @media  screen and (max-width: 700px) {
     .home-mid{
