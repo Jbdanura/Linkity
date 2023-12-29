@@ -20,7 +20,7 @@ const Register = ({setLogin}) => {
         },3000)
         return
       }
-      const result = await axios.post("http://localhost:777/users/register",{username,email,password},{})
+      const result = await axios.post("https://linkity.onrender.com/users/register",{username,email,password},{})
       setSuccessMessage(`Created user ${result.data.username}`)
       setTimeout(()=>{
         setSuccessMessage(null)

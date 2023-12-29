@@ -1,3 +1,4 @@
+require("dotenv").config({path:"./secret/.env"})
 const express = require("express");
 const app = express();
 const {connect} = require("./db.js")
@@ -51,8 +52,8 @@ app.use(limiter)
 
 app.use(bodyParser.json())
 
-app.listen(777,()=>{
-    console.log("wease")
+app.listen(process.env.PORT,()=>{
+    console.log("running server!")
 })
 
 app.use("/users",usersRouter)

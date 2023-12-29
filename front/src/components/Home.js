@@ -23,10 +23,10 @@ const Home = ({user,logout,userData,notFound}) => {
   const getPosts = async () =>{
     try {
       if(showAllPosts == true){
-          const result = await axios.get("http://localhost:777/posts/all")  
+          const result = await axios.get("https://linkity.onrender.com/posts/all")  
           setHomePosts(result.data)
       } else {
-          const result = await axios.get(`http://localhost:777/posts/all/following/${user.username}`)
+          const result = await axios.get(`https://linkity.onrender.com/posts/all/following/${user.username}`)
           setHomePosts(result.data)
         }
       } catch (error) {}
@@ -39,14 +39,14 @@ const Home = ({user,logout,userData,notFound}) => {
 
   const follow = async (userToFollow)=>{
     try {
-      const result = await axios.post(`http://localhost:777/users/follow`,{userToFollow},{headers:{"Authorization":`Bearer ${user.token}`}})
+      const result = await axios.post(`https://linkity.onrender.com/users/follow`,{userToFollow},{headers:{"Authorization":`Bearer ${user.token}`}})
       window.location.reload()
     } catch (error) {}
   }
 
   const followingState = async() => {
     try {
-      const result = await axios.post(`http://localhost:777/users/followingState`,{following:userData.username,follower:user.username})
+      const result = await axios.post(`https://linkity.onrender.com/users/followingState`,{following:userData.username,follower:user.username})
       setIsFollowing(result.data)
     } catch (error) {}
   }
@@ -54,7 +54,7 @@ const Home = ({user,logout,userData,notFound}) => {
   const getFollow = async() => {
     try {
       const usernameMain = userData ? userData.username : user.username
-      const result = await axios.get(`http://localhost:777/users/followInfo/${usernameMain}`)
+      const result = await axios.get(`https://linkity.onrender.com/users/followInfo/${usernameMain}`)
       setFollowing(result.data.following)
       setFollowers(result.data.followers)
       console.log(following)

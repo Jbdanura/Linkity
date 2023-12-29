@@ -7,7 +7,7 @@ const Comment = ({user,post}) => {
   const newComment = async(e) =>{
     try {
         e.preventDefault()
-        const result = await axios.post(`http://localhost:777/posts/comment/${post.id}`,{description},
+        const result = await axios.post(`https://linkity.onrender.com/posts/comment/${post.id}`,{description},
         {headers:{"Authorization":`Bearer ${user.token}`}})
         window.location.reload()
     } catch (error) {

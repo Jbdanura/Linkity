@@ -13,7 +13,7 @@ const Post = ({post,user}) => {
 
   const doEditPost = async () => {
     try {
-      const result = await axios.post(`http://localhost:777/posts/edit/${post.id}`,{editPostContent},{headers:{"Authorization":`Bearer ${user.token}`}})
+      const result = await axios.post(`https://linkity.onrender.com/posts/edit/${post.id}`,{editPostContent},{headers:{"Authorization":`Bearer ${user.token}`}})
       window.location.reload()
     } catch (error) {
       
@@ -22,7 +22,7 @@ const Post = ({post,user}) => {
 
   const doDeletePost = async () => {
     try {
-      const result = await axios.delete(`http://localhost:777/posts/${post.id}`,{headers:{"Authorization":`Bearer ${user.token}`}})
+      const result = await axios.delete(`https://linkity.onrender.com/posts/${post.id}`,{headers:{"Authorization":`Bearer ${user.token}`}})
       window.location.reload()
     } catch (error) {
       

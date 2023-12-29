@@ -8,7 +8,7 @@ const Comments = ({user,post}) => {
 
   const deleteComment = async (id) => {
     try {
-      const result = await axios.delete(`http://localhost:777/posts/comment/${id}`,{headers:{"Authorization":`Bearer ${user.token}`}})
+      const result = await axios.delete(`https://linkity.onrender.com/posts/comment/${id}`,{headers:{"Authorization":`Bearer ${user.token}`}})
       console.log(result)
       window.location.reload()
     } catch (error) {

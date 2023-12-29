@@ -9,7 +9,7 @@ const Recommended = ({recommendedModal, setRecommendedModal,user}) => {
   const navigate = useNavigate()
 
   const getUsers = async() => {
-    const data = await axios.get("http://localhost:777/users/recommended")
+    const data = await axios.get("https://linkity.onrender.com/users/recommended")
     setUsers(data.data)
   }
 

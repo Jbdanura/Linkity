@@ -14,7 +14,7 @@ const Configuration = ({user,logout}) => {
     try {
         e.preventDefault()
         const username = user.username
-        const post = await axios.post("http://localhost:777/users/changePassword",{oldPassword,newPassword,username},{headers:{"Authorization":`Bearer ${user.token}`}})
+        const post = await axios.post("https://linkity.onrender.com/users/changePassword",{oldPassword,newPassword,username},{headers:{"Authorization":`Bearer ${user.token}`}})
         setSuccessMessage("Password changed")
         setTimeout(()=>{
           setSuccessMessage(null)

@@ -11,7 +11,7 @@ const Login = ({setLogin,setUser}) => {
   const login = async (e) => {
     try {
       e.preventDefault()
-      const result = await axios.post("http://localhost:777/users/login",{username,password},{})
+      const result = await axios.post("https://linkity.onrender.com/users/login",{username,password},{})
       setSuccessMessage(`Logged in`)
       setTimeout(()=>{
         setSuccessMessage(null)

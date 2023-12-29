@@ -11,7 +11,7 @@ const Profile = ({user,logout}) => {
 
   const getUserData = async()=>{
     try {
-      const data = await axios.get(`http://localhost:777/users/user/${username}`)
+      const data = await axios.get(`https://linkity.onrender.com/users/user/${username}`)
       setUserData(data.data)
     } catch (error) {
       console.log(error)

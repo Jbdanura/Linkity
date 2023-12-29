@@ -11,7 +11,7 @@ const NewPost = ({user}) => {
   const createPost = async (e) => {
     try {
         e.preventDefault()
-        const post = await axios.post("http://localhost:777/posts/new",{content},{headers:{"Authorization":`Bearer ${user.token}`}})
+        const post = await axios.post("https://linkity.onrender.com/posts/new",{content},{headers:{"Authorization":`Bearer ${user.token}`}})
         setSuccessMessage("Published post")
         setContent("")
         setInterval(()=>{

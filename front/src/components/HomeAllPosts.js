@@ -8,7 +8,7 @@ const HomeAllPosts = () => {
 
   const retrievePosts = async () => {
     try {
-        const result = await axios.get("http://localhost:777/posts/all")
+        const result = await axios.get("https://linkity.onrender.com/posts/all")
         setPosts(result.data)
     } catch (error) {
         alert(error)
