@@ -1,7 +1,7 @@
 require("dotenv").config({path:"./secret/.env"})
 
 const {Sequelize} = require("sequelize")
-const sequelize = new Sequelize(`postgres://${process.env.DBUSER}:${process.env.DBPASS}@${process.env.DBLOC}:${process.env.DBPORT}/${process.env.DBNAME}`)
+const sequelize = new Sequelize(`${process.env.DBURL}`)
 
 const connect = async() => {
     try {
