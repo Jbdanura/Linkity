@@ -3,7 +3,7 @@ import "./NewPost.css"
 import UserIcon from "../images/user.png"
 import axios from "axios"
 
-const NewPost = ({user,baseUrl,getPosts,showAllPosts,setHomePosts}) => {
+const NewPost = ({user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,setUserData}) => {
   const [content,setContent] = useState("")
   const [errorMessage,setErrorMessage] = useState("")
   const [successMessage,setSuccessMessage] = useState("")
@@ -17,6 +17,9 @@ const NewPost = ({user,baseUrl,getPosts,showAllPosts,setHomePosts}) => {
         setInterval(()=>{
           setSuccessMessage(null)
           getPosts(showAllPosts,setHomePosts)
+          if(getUserData){
+            getUserData(setUserData)
+          }
         },1000)
     } catch (error) {
         if(error.response.data){

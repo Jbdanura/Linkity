@@ -6,7 +6,7 @@ import axios from "axios"
 import Comment from './Comment'
 import Comments from './Comments'
 
-const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts}) => {
+const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,setUserData}) => {
   const [editPost,setEditPost] = useState(false)
   const [editPostContent,setEditPostContent] = useState(post.content)
   const navigate = useNavigate()
@@ -15,6 +15,9 @@ const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts}) => {
     try {
       const result = await axios.post(`${baseUrl}/posts/edit/${post.id}`,{editPostContent},{headers:{"Authorization":`Bearer ${user.token}`}})
       getPosts(showAllPosts,setHomePosts)
+      if(getUserData){
+        getUserData(setUserData)
+      }
       setEditPost(false)
     } catch (error) {}
   }
@@ -24,6 +27,9 @@ const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts}) => {
       const result = await axios.delete(`${baseUrl}/posts/${post.id}`,{headers:{"Authorization":`Bearer ${user.token}`}})
       alert("Deleted post!")
       getPosts(showAllPosts,setHomePosts)
+      if(getUserData){
+        getUserData(setUserData)
+      }
     } catch (error) { }
   }
 

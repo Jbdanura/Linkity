@@ -9,7 +9,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 
-const Home = ({user,logout,userData,notFound,baseUrl}) => {
+const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) => {
   const [recommendedModal,setRecommendedModal] = useState(false)
   const [showAllPosts,setShowAllPosts] = useState(true)
   const [homePosts,setHomePosts] = useState([])
@@ -140,11 +140,12 @@ const Home = ({user,logout,userData,notFound,baseUrl}) => {
           {(!userData && !notFound) && <NewPost user={user} baseUrl={baseUrl} getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts}/>}
           {notFound && <p className="not-found">User not found</p>}
           <p className="show-recommended" onClick={()=>setRecommendedModal(true)}>Show recommended users</p>
-          {(userData && userData.username == user.username) && <NewPost user={user} baseUrl={baseUrl} getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts}/>}
+          {(userData && userData.username == user.username) && <NewPost user={user} baseUrl={baseUrl} getPosts={getPosts} showAllPosts={showAllPosts} 
+          setHomePosts={setHomePosts} getUserData={getUserData} setUserData={setUserData}/>}
           <div className="posts-container">
           {(userData && userData.posts && userData.posts.length > 0) ? userData.posts.map(post=>{
             return <Post post={post} user={user} baseUrl={baseUrl}
-             getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts}/>
+             getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts} getUserData={getUserData} setUserData={setUserData}/>
           }) :
             <div className="posts-home-container">
               {(!notFound && !userData) && <div className="posts-home">
