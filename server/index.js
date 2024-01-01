@@ -13,7 +13,6 @@ const Follow = require("./models/follow.js")
 const rateLimit = require("express-rate-limit")
 
 app.use(cors())
-app.enable('trust proxy');
 
 connect()
 
