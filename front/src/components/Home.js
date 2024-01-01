@@ -9,7 +9,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 
-const Home = ({user,logout,userData,notFound}) => {
+const Home = ({user,logout,userData,notFound,baseUrl}) => {
   const [recommendedModal,setRecommendedModal] = useState(false)
   const [showAllPosts,setShowAllPosts] = useState(true)
   const [homePosts,setHomePosts] = useState([])
@@ -20,13 +20,13 @@ const Home = ({user,logout,userData,notFound}) => {
   const [showFollowingModal, setShowFollowingModal] = useState(false);
   const navigate = useNavigate()
 
-  const getPosts = async () =>{
+  const getPosts = async (showAllPosts,setHomePosts) =>{
     try {
       if(showAllPosts == true){
-          const result = await axios.get("https://linkity.onrender.com/posts/all")  
+          const result = await axios.get(`${baseUrl}/posts/all`)  
           setHomePosts(result.data)
       } else {
-          const result = await axios.get(`https://linkity.onrender.com/posts/all/following/${user.username}`)
+          const result = await axios.get(`${baseUrl}/posts/all/following/${user.username}`)
           setHomePosts(result.data)
         }
       } catch (error) {}
@@ -39,14 +39,13 @@ const Home = ({user,logout,userData,notFound}) => {
 
   const follow = async (userToFollow)=>{
     try {
-      const result = await axios.post(`https://linkity.onrender.com/users/follow`,{userToFollow},{headers:{"Authorization":`Bearer ${user.token}`}})
-      window.location.reload()
+      const result = await axios.post(`${baseUrl}/users/follow`,{userToFollow},{headers:{"Authorization":`Bearer ${user.token}`}})
     } catch (error) {}
   }
 
   const followingState = async() => {
     try {
-      const result = await axios.post(`https://linkity.onrender.com/users/followingState`,{following:userData.username,follower:user.username})
+      const result = await axios.post(`${baseUrl}/users/followingState`,{following:userData.username,follower:user.username})
       setIsFollowing(result.data)
     } catch (error) {}
   }
@@ -54,14 +53,13 @@ const Home = ({user,logout,userData,notFound}) => {
   const getFollow = async() => {
     try {
       const usernameMain = userData ? userData.username : user.username
-      const result = await axios.get(`https://linkity.onrender.com/users/followInfo/${usernameMain}`)
+      const result = await axios.get(`${baseUrl}/users/followInfo/${usernameMain}`)
       setFollowing(result.data.following)
       setFollowers(result.data.followers)
-      console.log(following)
     } catch (error) {}
   }
 
-  useEffect(()=>{getPosts();getFollow();followingState()},[showAllPosts,userData,user])
+  useEffect(()=>{getPosts(showAllPosts,setHomePosts);getFollow();followingState()},[showAllPosts,userData,user])
 
   // New functions to open and close modal
   const openFollowersModal = () => {
@@ -135,17 +133,18 @@ const Home = ({user,logout,userData,notFound}) => {
               </div>
             )}
           {(userData && userData.username != user.username )&& 
-          <>{!isFollowing ? <button className="left-head-follow" onClick={()=>{follow(userData.username);getFollow()}}>Follow</button> :
-          <button className="left-head-unfollow" onClick={()=>{follow(userData.username);getFollow()}}>Unfollow</button> }</>}
+          <>{!isFollowing ? <button className="left-head-follow" onClick={()=>{follow(userData.username);getFollow();followingState()}}>Follow</button> :
+          <button className="left-head-unfollow" onClick={()=>{follow(userData.username);getFollow();followingState()}}>Unfollow</button> }</>}
         </div>
         <div className="home-mid">
-          {(!userData && !notFound) && <NewPost user={user}/>}
+          {(!userData && !notFound) && <NewPost user={user} baseUrl={baseUrl} getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts}/>}
           {notFound && <p className="not-found">User not found</p>}
           <p className="show-recommended" onClick={()=>setRecommendedModal(true)}>Show recommended users</p>
-          {(userData && userData.username == user.username) && <NewPost user={user}/>}
+          {(userData && userData.username == user.username) && <NewPost user={user} baseUrl={baseUrl} getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts}/>}
           <div className="posts-container">
           {(userData && userData.posts && userData.posts.length > 0) ? userData.posts.map(post=>{
-            return <Post post={post} user={user}/>
+            return <Post post={post} user={user} baseUrl={baseUrl}
+             getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts}/>
           }) :
             <div className="posts-home-container">
               {(!notFound && !userData) && <div className="posts-home">
@@ -155,7 +154,8 @@ const Home = ({user,logout,userData,notFound}) => {
                 </select>
                 <div className="posts-home-show">
                   {(homePosts && homePosts.length > 0) && homePosts.map(homePost=>{
-                    return <Post post={homePost} user={user}/>
+                    return <Post post={homePost} user={user} baseUrl={baseUrl}
+                     getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts}/>
                   })}
                 </div>
               </div>}
@@ -163,7 +163,7 @@ const Home = ({user,logout,userData,notFound}) => {
           </div>
         </div>
         <div className="home-right">
-          <Recommended recommendedModal={recommendedModal} setRecommendedModal={setRecommendedModal} user={user} follow={follow} getFollow={getFollow}/>
+          <Recommended recommendedModal={recommendedModal} setRecommendedModal={setRecommendedModal} user={user} follow={follow} getFollow={getFollow} baseUrl={baseUrl}/>
         </div>
       </div>
     </div>

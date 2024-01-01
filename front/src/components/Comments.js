@@ -3,16 +3,15 @@ import { useNavigate } from 'react-router-dom'
 import "./Comments.css"
 import axios from "axios"
 
-const Comments = ({user,post}) => {
+const Comments = ({user,post,baseUrl,getPosts,showAllPosts,setHomePosts}) => {
   const navigate = useNavigate()
 
   const deleteComment = async (id) => {
     try {
-      const result = await axios.delete(`https://linkity.onrender.com/posts/comment/${id}`,{headers:{"Authorization":`Bearer ${user.token}`}})
-      console.log(result)
-      window.location.reload()
-    } catch (error) {
-    }
+      const result = await axios.delete(`${baseUrl}/posts/comment/${id}`,{headers:{"Authorization":`Bearer ${user.token}`}})
+      alert("Deleted comment!")
+      getPosts(showAllPosts,setHomePosts)
+    } catch (error) {}
   }
 
   return (

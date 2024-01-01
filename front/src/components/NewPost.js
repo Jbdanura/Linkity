@@ -3,7 +3,7 @@ import "./NewPost.css"
 import UserIcon from "../images/user.png"
 import axios from "axios"
 
-const NewPost = ({user}) => {
+const NewPost = ({user,baseUrl,getPosts,showAllPosts,setHomePosts}) => {
   const [content,setContent] = useState("")
   const [errorMessage,setErrorMessage] = useState("")
   const [successMessage,setSuccessMessage] = useState("")
@@ -11,12 +11,12 @@ const NewPost = ({user}) => {
   const createPost = async (e) => {
     try {
         e.preventDefault()
-        const post = await axios.post("https://linkity.onrender.com/posts/new",{content},{headers:{"Authorization":`Bearer ${user.token}`}})
+        const post = await axios.post(`${baseUrl}/posts/new`,{content},{headers:{"Authorization":`Bearer ${user.token}`}})
         setSuccessMessage("Published post")
         setContent("")
         setInterval(()=>{
           setSuccessMessage(null)
-          window.location.reload()
+          getPosts(showAllPosts,setHomePosts)
         },1000)
     } catch (error) {
         if(error.response.data){

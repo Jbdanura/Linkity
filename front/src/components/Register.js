@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import "./RegisterLogin.css"
 import axios from "axios"
 
-const Register = ({setLogin}) => {
+const Register = ({setLogin,baseUrl}) => {
   const [username,setUsername] = useState("")
   const [password,setPassword] = useState("")
   const [confirmPassword,setConfirmPassword] = useState("")
@@ -20,7 +20,7 @@ const Register = ({setLogin}) => {
         },3000)
         return
       }
-      const result = await axios.post("https://linkity.onrender.com/users/register",{username,email,password},{})
+      const result = await axios.post(`${baseUrl}/users/register`,{username,email,password},{})
       setSuccessMessage(`Created user ${result.data.username}`)
       setTimeout(()=>{
         setSuccessMessage(null)

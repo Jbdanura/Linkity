@@ -4,14 +4,14 @@ import axios from 'axios'
 import "./Profile.css"
 import Home from './Home'
 
-const Profile = ({user,logout}) => {
+const Profile = ({user,logout,baseUrl}) => {
   const username = useParams().username
   const [userData,setUserData] = useState([])
   const navigate = useNavigate()
 
   const getUserData = async()=>{
     try {
-      const data = await axios.get(`https://linkity.onrender.com/users/user/${username}`)
+      const data = await axios.get(`${baseUrl}/users/user/${username}`)
       setUserData(data.data)
     } catch (error) {
       console.log(error)
@@ -25,8 +25,8 @@ const Profile = ({user,logout}) => {
 
   return (
       <div className="profile-found">
-         {userData ? <Home user={user} logout={logout} userData={userData}/> 
-         : <Home user={user} logout={logout} notFound={true}/>
+         {userData ? <Home user={user} logout={logout} userData={userData} baseUrl={baseUrl}/> 
+         : <Home user={user} logout={logout} notFound={true} baseUrl={baseUrl}/>
          }
       </div>
   )

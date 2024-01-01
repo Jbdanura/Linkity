@@ -2,14 +2,16 @@ import React,{useState} from 'react'
 import axios from "axios"
 import "./Comment.css"
 
-const Comment = ({user,post}) => {
+const Comment = ({user,post,baseUrl,getPosts,showAllPosts,setHomePosts}) => {
   const [description,setDescription] = useState("")
   const newComment = async(e) =>{
     try {
         e.preventDefault()
-        const result = await axios.post(`https://linkity.onrender.com/posts/comment/${post.id}`,{description},
+        if(description.length > 300 || description.length < 5) alert("Comment too short/long")
+        const result = await axios.post(`${baseUrl}/posts/comment/${post.id}`,{description},
         {headers:{"Authorization":`Bearer ${user.token}`}})
-        window.location.reload()
+        getPosts(showAllPosts,setHomePosts)
+        setDescription("")
     } catch (error) {
     }
   }

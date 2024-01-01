@@ -60,6 +60,9 @@
     background-color: green;
     font-weight: bolder;
 }
+.left-head-follow:hover,.left-head-unfollow:hover{
+    cursor: pointer;
+}
 .left-head-unfollow{
     color: green;
     background-color: white;

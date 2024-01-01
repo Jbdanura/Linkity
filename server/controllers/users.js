@@ -14,7 +14,9 @@ usersRouter.get("/",async(req,res)=>{
 
 usersRouter.post("/register",async(req,res)=>{
     try {
-        const {username,email,password} = req.body
+        let {username,email,password} = req.body
+        username = username.toLowerCase()
+        email = email.toLowerCase()
         if(username.length < 3 || username.length > 10) return res.status(400).send("Username length must be between 3 and 10 characters")
         if (!/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) return res.status(400).send("Invalid email")
         if(password.length < 5 || password.length > 20) return res.status(400).send("Password must be between 5 and 20 characters long")
@@ -34,7 +36,8 @@ usersRouter.post("/register",async(req,res)=>{
 
 usersRouter.post("/login",async(req,res)=>{
     try {
-        const {username,password} = req.body
+        let {username,password} = req.body
+        username = username.toLowerCase()
         if(username.length < 3 || username.length > 10) return res.status(400).send("Username length must be between 3 and 10 characters")
         if(password.length < 5 || password.length > 20) return res.status(400).send("Password must be between 5 and 20 characters long")
         let user = await User.findOne({where:{username}})
@@ -55,7 +58,7 @@ usersRouter.post("/login",async(req,res)=>{
 
 usersRouter.get("/user/:username",async(req,res)=>{
     try {
-        const username = req.params.username
+        const username = req.params.username.toLowerCase()
         const user = await User.findOne({where:{username},attributes:["username","id"],
         include:[{model:Post,include:[{model:Comment,include:{model:User,attributes:["username"]}}]}],order: [[Post, "createdAt", "DESC"]],})
         return res.status(200).send(user)

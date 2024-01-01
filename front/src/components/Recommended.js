@@ -4,12 +4,12 @@ import axios from "axios"
 import userAvatar from "../images/user.png"
 import { useNavigate } from 'react-router-dom'
 
-const Recommended = ({recommendedModal, setRecommendedModal,user}) => {
+const Recommended = ({recommendedModal, setRecommendedModal,user,baseUrl}) => {
   const [users,setUsers] = useState("")
   const navigate = useNavigate()
 
   const getUsers = async() => {
-    const data = await axios.get("https://linkity.onrender.com/users/recommended")
+    const data = await axios.get(`${baseUrl}/users/recommended`)
     setUsers(data.data)
   }
 

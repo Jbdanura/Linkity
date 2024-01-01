@@ -6,27 +6,25 @@ import axios from "axios"
 import Comment from './Comment'
 import Comments from './Comments'
 
-const Post = ({post,user}) => {
+const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts}) => {
   const [editPost,setEditPost] = useState(false)
   const [editPostContent,setEditPostContent] = useState(post.content)
   const navigate = useNavigate()
 
   const doEditPost = async () => {
     try {
-      const result = await axios.post(`https://linkity.onrender.com/posts/edit/${post.id}`,{editPostContent},{headers:{"Authorization":`Bearer ${user.token}`}})
-      window.location.reload()
-    } catch (error) {
-      
-    }
+      const result = await axios.post(`${baseUrl}/posts/edit/${post.id}`,{editPostContent},{headers:{"Authorization":`Bearer ${user.token}`}})
+      getPosts(showAllPosts,setHomePosts)
+      setEditPost(false)
+    } catch (error) {}
   }
 
   const doDeletePost = async () => {
     try {
-      const result = await axios.delete(`https://linkity.onrender.com/posts/${post.id}`,{headers:{"Authorization":`Bearer ${user.token}`}})
-      window.location.reload()
-    } catch (error) {
-      
-    }
+      const result = await axios.delete(`${baseUrl}/posts/${post.id}`,{headers:{"Authorization":`Bearer ${user.token}`}})
+      alert("Deleted post!")
+      getPosts(showAllPosts,setHomePosts)
+    } catch (error) { }
   }
 
   return (
@@ -46,8 +44,8 @@ const Post = ({post,user}) => {
         <p>{post.content}</p>
         }
       </div>
-      <Comment user={user} post={post}/>
-      <Comments user={user} post={post}/>
+      <Comment user={user} post={post} baseUrl={baseUrl} getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts}/>
+      <Comments user={user} post={post} baseUrl={baseUrl} getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts}/>
     </div>
   )
 }

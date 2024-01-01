@@ -12,9 +12,11 @@
     border: 1px solid rgb(119, 119, 119);
     margin-right: 5px;
     border-radius: 5px;
+    font-weight: bold;
 }
 .login input::placeholder{
-    color: grey;
+    color: rgb(0, 0, 0);
+    font-weight: 100;
 }
 .login h1{
     color: white;
@@ -51,6 +53,11 @@
     background-color: rgba(240, 248, 255, 0.747);
     border: 1px solid grey;
     margin: 5px;
+    font-weight: bold;
+}
+.register-form input::placeholder{
+    color: black;
+    font-weight: 100;
 }
 .register-form p{
     margin-left: 15px;

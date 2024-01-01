@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import "./Navbar.css"
 import {useNavigate} from "react-router-dom"
 
-const Navbar = ({user,logout}) => {
+const Navbar = ({user,logout,baseUrl}) => {
   const navigate = useNavigate()
   const [search,setSearch] = useState("")
   const handleKeyDown = (event) => {

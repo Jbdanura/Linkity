@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 import "./Configuration.css"
 import axios from "axios"
 
-const Configuration = ({user,logout}) => {
+const Configuration = ({user,logout,baseUrl}) => {
 
   const[newPassword,setNewPassword] = useState("")
   const[oldPassword,setOldPassword] = useState("")
@@ -14,7 +14,7 @@ const Configuration = ({user,logout}) => {
     try {
         e.preventDefault()
         const username = user.username
-        const post = await axios.post("https://linkity.onrender.com/users/changePassword",{oldPassword,newPassword,username},{headers:{"Authorization":`Bearer ${user.token}`}})
+        const post = await axios.post(`${baseUrl}/users/changePassword`,{oldPassword,newPassword,username},{headers:{"Authorization":`Bearer ${user.token}`}})
         setSuccessMessage("Password changed")
         setTimeout(()=>{
           setSuccessMessage(null)
@@ -34,7 +34,7 @@ const Configuration = ({user,logout}) => {
 
   return (
     <div>
-        <Navbar user={user} logout={logout}/>
+        <Navbar user={user} logout={logout} baseUrl={baseUrl}/>
         <div className="configuration-container">
             <h4>Change your password</h4>
             <h2 className={errorMessage  ? 'showErrorMessage' : 'hideErrorMessage'}>{errorMessage}</h2>

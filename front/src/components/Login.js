@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import "./RegisterLogin.css"
 import axios from "axios"
 
-const Login = ({setLogin,setUser}) => {
+const Login = ({setLogin,setUser,baseUrl}) => {
   const [username,setUsername] = useState("")
   const [password,setPassword] = useState("")
   const [errorMessage,setErrorMessage] = useState("")
@@ -11,12 +11,11 @@ const Login = ({setLogin,setUser}) => {
   const login = async (e) => {
     try {
       e.preventDefault()
-      const result = await axios.post("https://linkity.onrender.com/users/login",{username,password},{})
+      const result = await axios.post(`${baseUrl}/users/login`,{username,password},{})
       setSuccessMessage(`Logged in`)
       setTimeout(()=>{
         setSuccessMessage(null)
         setUser(result.data)
-        console.log(result.data)
         localStorage.setItem("user", JSON.stringify(result.data));
       },1500)
     } catch (error) {
