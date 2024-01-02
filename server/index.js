@@ -48,6 +48,16 @@ const limiter = rateLimit({
 	legacyHeaders: false, 
 })
 
+const https = require("https");
+setInterval(function() {
+    try{
+        https.get("https://linkity.onrender.com");
+    } catch (error){
+        console.log(error)
+    }
+}, 600000)
+
+
 app.use(limiter)
 
 app.use(bodyParser.json())
