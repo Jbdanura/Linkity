@@ -1,17 +1,18 @@
 .new-post{
-    background-color: rgba(137, 43, 226, 0.281);
-    padding: 20px;
+    padding: 10px 0;
     display: flex;
     align-items: center;
+    width: 100%;
+
 }
 .new-post img{
     width: 50px;
     border-radius: 15px;
-    margin-right: 15px;
     margin-left: 5px;
+    margin-right: 3px;
 }
 .new-post input{
-    width: 38vw;
+    width: 90%;
     height: 40px;
     border-radius: 15px;
     border: 1px solid rgb(134, 103, 182);
@@ -19,7 +20,27 @@
     padding-left: 30px;
     color: rgb(77, 51, 117);
 }
-
+.new-post p{
+    font-size: 25px;
+    font-weight: bolder;
+}
+.new-post button{
+    height: 42px;
+    width: 40px;
+    margin-left: -41px;
+    border-radius: 15px;
+    border: none;
+    background-color: rgb(62, 192, 36);
+    color: white;
+}
+.new-post button:hover{
+    cursor: pointer;
+}
+.new-post-info{
+    display: flex;
+    align-items: center;
+    width: 90%;
+}
 @media  screen and (max-width: 1000px) {
     .new-post input{
         font-size: 20px;

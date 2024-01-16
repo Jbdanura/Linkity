@@ -10,6 +10,7 @@ const User = require("./models/user.js")
 const Post = require("./models/post.js")
 const Comment = require("./models/comment.js")
 const Follow = require("./models/follow.js")
+const Like = require("./models/like.js")
 const rateLimit = require("express-rate-limit")
 
 app.use(cors())
@@ -35,6 +36,16 @@ const modelsSync = () => {
       User.belongsToMany(User,{through:Follow, as:"follower", foreignKey:"followerId"})
       Follow.belongsTo(User, { as: 'follower', foreignKey: 'followerId' });
       Follow.belongsTo(User, { as: 'following', foreignKey: 'followingId' });
+      User.hasMany(Like, {
+        foreignKey: "userId"
+      });
+      
+      Post.hasMany(Like, {
+        foreignKey: "postId"
+      });
+      
+      Like.belongsTo(User);
+      Like.belongsTo(Post);
     } catch (error) {
       console.log(error)
     }
