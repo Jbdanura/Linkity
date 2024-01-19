@@ -10,7 +10,6 @@ const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,
   const [editPost,setEditPost] = useState(false)
   const [editPostContent,setEditPostContent] = useState(post.content)
   const [likesModal,setLikesModal] = useState(false)
-  const [isLiked,setIsLiked] = useState(post.Likes.some((like) => like.userId === user.id))
   const navigate = useNavigate()
 
   const doEditPost = async () => {
@@ -58,12 +57,12 @@ const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,
         }
       </div>
       <div className="like-post">
-        {isLiked ? <button className="unlike-post-btn" onClick={()=>{likePost();setIsLiked(false); getPosts(showAllPosts,setHomePosts);
+        {post.Likes.some((like) => like.userId === user.id) ? <button className="unlike-post-btn" onClick={()=>{likePost(); getPosts(showAllPosts,setHomePosts);
               if(getUserData){
                 getUserData(setUserData)
               }
         }}>❤</button>
-         : <button className="like-post-btn" onClick={()=>{likePost();setIsLiked(true); getPosts(showAllPosts,setHomePosts);
+         : <button className="like-post-btn" onClick={()=>{likePost();getPosts(showAllPosts,setHomePosts);
           if(getUserData){
             getUserData(setUserData)
           }
