@@ -2,7 +2,7 @@
     width: 93%;
     height: 30px;
     font-size: 15px;
-    border: 1px solid grey;
+    border: 1px solid rgba(128, 128, 128, 0.24);
 }
 .comment-container button{
     width: 5%;
@@ -14,7 +14,7 @@
     color: white;
 }
 .comment-container{
-    border-top: 1px solid rgba(0, 0, 0, 0.267);
+    border-top: 1px solid rgba(0, 0, 0, 0.151);
 }
 .comment-container h3{
     font-style: italic;

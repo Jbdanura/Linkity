@@ -1,5 +1,5 @@
 .comment{
-    border-bottom: 1px solid rgba(0, 0, 0, 0.39);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.144);
     position: relative;
 }
 .comment-user{
@@ -12,7 +12,6 @@
 }
 .comment-user:hover{
     cursor: pointer;
-    transform: scale(1.1);
 }
 .delete-comment{
     position: absolute;

@@ -4,7 +4,6 @@
 .post{
     background-color: white;
     padding: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.562);
     margin-bottom: 10px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
@@ -64,6 +63,7 @@
 }
 .like-post{
     margin: 5px;
+    padding-bottom: 20px;
 }
 .like-post-btn,.unlike-post-btn{
     border: none;
