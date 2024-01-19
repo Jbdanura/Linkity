@@ -9,6 +9,8 @@ import Comments from './Comments'
 const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,setUserData}) => {
   const [editPost,setEditPost] = useState(false)
   const [editPostContent,setEditPostContent] = useState(post.content)
+  const [likesModal,setLikesModal] = useState(false)
+  const [isLiked,setIsLiked] = useState(post.Likes.some((like) => like.userId === user.id))
   const navigate = useNavigate()
 
   const doEditPost = async () => {
@@ -32,6 +34,11 @@ const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,
       }
     } catch (error) { }
   }
+  const likePost = async () => {
+    try {
+      const result = await axios.post(`${baseUrl}/posts/like/${post.id}`,{},{headers:{"Authorization":`Bearer ${user.token}`}})
+    } catch (error) {}
+  }
 
   return (
     <div className="post">
@@ -50,6 +57,33 @@ const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,
         <p>{post.content}</p>
         }
       </div>
+      <div className="like-post">
+        {isLiked ? <button className="unlike-post-btn" onClick={()=>{likePost();setIsLiked(false); getPosts(showAllPosts,setHomePosts);
+              if(getUserData){
+                getUserData(setUserData)
+              }
+        }}>❤</button>
+         : <button className="like-post-btn" onClick={()=>{likePost();setIsLiked(true); getPosts(showAllPosts,setHomePosts);
+          if(getUserData){
+            getUserData(setUserData)
+          }
+         }}>❤</button>}
+        <button className="show-likes" onClick={()=>setLikesModal(!likesModal)}>{post.Likes.length}</button>
+      </div>
+      {likesModal && (
+        <div className="modal-home">
+          <div className="modal-home-content">
+            <span className="modal-home-close" onClick={()=>setLikesModal(false)}>&times;</span>
+            <h2>Likes</h2>
+            {post.Likes && post.Likes.map(like=>{
+                      return <div className="modal-home-follower">
+                              <img src={UserIcon}/>
+                              <h4 onClick={()=>{navigate(`/user/${like.user.username}`);setLikesModal(false)}}>{like.user.username}</h4>
+                      </div>
+                  })}
+          </div>
+        </div>
+      )}
       <Comment user={user} post={post} baseUrl={baseUrl} getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts}/>
       <Comments user={user} post={post} baseUrl={baseUrl} getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts}/>
     </div>

@@ -59,7 +59,7 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
     } catch (error) {}
   }
 
-  useEffect(()=>{getPosts(showAllPosts,setHomePosts);getFollow();followingState()},[showAllPosts,userData,user])
+  useEffect(()=>{getPosts(showAllPosts,setHomePosts);getFollow();followingState()},[showAllPosts,user])
 
   // New functions to open and close modal
   const openFollowersModal = () => {

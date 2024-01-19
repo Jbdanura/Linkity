@@ -7,10 +7,7 @@ const getToken = require("../middleware/token.js")
 const Post = require("../models/post.js")
 const Comment = require("../models/comment.js")
 const Follow = require("../models/follow.js")
-
-usersRouter.get("/",async(req,res)=>{
-    return res.status(200).send("e")
-})
+const Like = require("../models/like.js")
 
 usersRouter.post("/register",async(req,res)=>{
     try {
@@ -60,7 +57,7 @@ usersRouter.get("/user/:username",async(req,res)=>{
     try {
         const username = req.params.username.toLowerCase()
         const user = await User.findOne({where:{username},attributes:["username","id"],
-        include:[{model:Post,include:[{model:Comment,include:{model:User,attributes:["username"]}}]}],order: [[Post, "createdAt", "DESC"]],})
+        include:[{model:Post,include:[{model:Like,include:{model:User,attributes:["username"]}},{model:Comment,include:{model:User,attributes:["username"]}}]}],order: [[Post, "createdAt", "DESC"]],})
         return res.status(200).send(user)
     } catch (error) {
         return res.status(400).send(error)
@@ -102,6 +99,7 @@ usersRouter.get("/followInfo/:username",async(req,res)=>{
         return res.status(200).json({following,followers})  
     } catch (error) {
         console.log(error)
+        return res.status(400).send("Server error")
     }
 })
 
@@ -117,6 +115,7 @@ usersRouter.post("/followingState",async(req,res)=>{
         } 
     } catch (error) {
         console.log(error)
+        return res.status(400).send("Server error")
     }
 
 })
