@@ -18,6 +18,7 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
   const [isFollowing,setIsFollowing] = useState(false)
   const [showFollowersModal, setShowFollowersModal] = useState(false);
   const [showFollowingModal, setShowFollowingModal] = useState(false);
+  const [paginationNumber, setPaginationNumber] = useState(1);
   const navigate = useNavigate()
 
   const getPosts = async (showAllPosts,setHomePosts) =>{
@@ -60,6 +61,24 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
   }
 
   useEffect(()=>{getPosts(showAllPosts,setHomePosts);getFollow();followingState()},[showAllPosts,user])
+
+  const handleScroll = () => {
+    const windowHeight = 'innerHeight' in window ? window.innerHeight : document.documentElement.offsetHeight;
+    const body = document.body;
+    const html = document.documentElement;
+    const docHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+    const windowBottom = windowHeight + window.pageYOffset;
+
+    if (windowBottom >= docHeight) {
+      // User has scrolled to the bottom
+      setPaginationNumber((prevPaginationNumber) => prevPaginationNumber + 1);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []); // Add/remove event listener on mount/unmount
 
   // New functions to open and close modal
   const openFollowersModal = () => {
@@ -143,7 +162,7 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
           {(userData && userData.username == user.username) && <NewPost user={user} baseUrl={baseUrl} getPosts={getPosts} showAllPosts={showAllPosts} 
           setHomePosts={setHomePosts} getUserData={getUserData} setUserData={setUserData}/>}
           <div className="posts-container">
-          {(userData && userData.posts && userData.posts.length > 0) ? userData.posts.map(post=>{
+          {(userData && userData.posts && userData.posts.length > 0) ? userData.posts.slice(0,paginationNumber * 10).map(post=>{
             return <Post post={post} user={user} baseUrl={baseUrl}
              getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts} getUserData={getUserData} setUserData={setUserData}/>
           }) :
@@ -154,7 +173,7 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
                   <option value={false} >Show only following posts</option>
                 </select>
                 <div className="posts-home-show">
-                  {(homePosts && homePosts.length > 0) && homePosts.map(homePost=>{
+                  {(homePosts && homePosts.length > 0) && homePosts.slice(0,paginationNumber * 3).map(homePost=>{
                     return <Post post={homePost} user={user} baseUrl={baseUrl}
                      getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts}/>
                   })}

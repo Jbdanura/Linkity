@@ -70,3 +70,12 @@ app.listen(process.env.PORT,()=>{
 
 app.use("/users",usersRouter)
 app.use("/posts",postsRouter)
+
+const https = require("https");
+setInterval(function() {
+    try{
+        https.get("https://linkity.onrender.com");
+    } catch (error){
+        console.log(error)
+    }
+}, 600000)
