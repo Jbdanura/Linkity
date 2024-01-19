@@ -9,6 +9,8 @@
     height: 36px;
     background-color: green;
     border: none;
+    border-radius: 10px;
+    margin-left: -10px;
     color: white;
 }
 .comment-container{
@@ -20,6 +22,7 @@
 }
 .comment-container button:hover{
     cursor: pointer;
+    transform: scale(1.1);
 }
 @media screen and (max-width: 1000px){
     .comment-container input{
@@ -30,6 +33,5 @@
     }
     .comment-container button{
         width: 15%;
-        height: 34px;
     }
 }

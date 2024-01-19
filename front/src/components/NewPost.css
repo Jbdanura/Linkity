@@ -10,6 +10,7 @@
     border-radius: 15px;
     margin-left: 5px;
     margin-right: 3px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .new-post input{
     width: 90%;
@@ -19,6 +20,7 @@
     font-size: 25px;
     padding-left: 30px;
     color: rgb(77, 51, 117);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .new-post p{
     font-size: 25px;
@@ -35,6 +37,7 @@
 }
 .new-post button:hover{
     cursor: pointer;
+    transform: scale(1.1);
 }
 .new-post-info{
     display: flex;

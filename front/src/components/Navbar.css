@@ -8,63 +8,68 @@
 }
 .navbar button{
     border: none;
+    background:none;
     height: 30px;
-    width: 80px;
-    margin-right: 5px;
     border-radius: 5px;
+    font-size: 15px;
+    color: rgb(0, 18, 66);
+    margin-right: 15px;
+}
+.navbar i{
+    font-size: 20px;
 }
 .navbar button:hover{
     cursor: pointer;
+    transform: scale(1.1)
 }
-.navbar .new-post{
-    background-color: blueviolet;
-    color: white;
+.navbar .my-profile:hover{
+    border: 1px solid black;
 }
 .navbar .my-profile{
-    background-color: rgb(43, 144, 226);
-    color: white;
+    display: inline-block;
+    width:30px;
+    height: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.171);
+    margin-top: -30px;
+    transform: translateY(9px);
+    margin-right: 15px;
+    border-radius: 5px;
 }
-.navbar .logout{
-    background-color: rgb(226, 95, 43);
-    color: white;
-    width: 60px;
+.navbar .my-profile:hover{
+    cursor: pointer;
 }
-.navbar .home{
-    background-color: rgb(33, 114, 26);
-    color: white;
-}
+
 .navbar input{
     width: 300px;
-    background-color: rgba(128, 128, 128, 0.171);
-    border-radius: 5px;
-    border: none;
+    background-color: rgba(152, 152, 182, 0.171);
+    border-radius: 15px;
+    border: 1px solid rgba(128, 128, 128, 0.26);
     padding: 5px;
     padding-left: 15px;
-    font-weight: bolder;
-    color: grey;
+    font-weight: bold;
+    color: rgb(14, 14, 14);
 }
 .navbar input::placeholder{
-    padding-left: 20px;
+    font-weight: bold;
 }
 .navbar .config{
-    background-color: rgb(209, 159, 49);
-    color: white;
+    background-color: rgba(130, 123, 194, 0.856);
+    width: 35px;
 }
 @media  screen and (max-width: 600px) {
     .navbar input{
         width: 150px;
     }
     .navbar button{
-        width: 80px;
+        margin-right: 3px;
     }
+    .navbar .my-profile{
+        margin-right: 3px;
+    }
+
 }
 @media  screen and (max-width: 500px) {
-    .navbar input{
-        width: 100px;
-    }
-    .navbar button{
-        width: 50px;
-    }
+
     .navbar *{
         font-size: 10px;
     }

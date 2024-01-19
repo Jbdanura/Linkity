@@ -3,7 +3,7 @@
     padding-top: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid black;
-    background-color: rgba(129, 98, 180, 0.856);
+    background-color: rgba(130, 123, 194, 0.856);
     border-radius: 3px;
 }
 .home-left .left-head img{
@@ -17,6 +17,7 @@
     background-color: white;
     height: 220px;
     border-radius: 5px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .home-left .left-head p{
     margin-left: 10px;
@@ -53,6 +54,7 @@
 }
 .select-display{
     margin-bottom: 20px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .left-head-follow,.left-head-unfollow{
     margin: 20px;
@@ -64,6 +66,7 @@
 }
 .left-head-follow:hover,.left-head-unfollow:hover{
     cursor: pointer;
+    transform: scale(1.1);
 }
 .left-head-unfollow{
     color: green;
