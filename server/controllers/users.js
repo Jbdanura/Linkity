@@ -8,6 +8,7 @@ const Post = require("../models/post.js")
 const Comment = require("../models/comment.js")
 const Follow = require("../models/follow.js")
 const Like = require("../models/like.js")
+const {cloudinary} = require("../db.js")
 
 usersRouter.post("/register",async(req,res)=>{
     try {
@@ -163,5 +164,30 @@ usersRouter.post("/follow",getToken,async(req,res)=>{
         return res.status(400).send(error)
     }
 })
+
+usersRouter.get('/images', async (req, res) => {
+    const { resources } = await cloudinary.search
+        .expression('folder:dev_setups')
+        .sort_by('public_id', 'desc')
+        .max_results(30)
+        .execute();
+
+    const publicIds = resources.map((file) => file.public_id);
+    res.send(publicIds);
+});
+
+usersRouter.post('/uploadImage', async (req, res) => {
+    try {
+        const fileStr = req.body.data;
+        const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+            upload_preset: 'dev_setups',
+        });
+        console.log(uploadResponse);
+        res.status(200).send("Image uploaded");
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ err: 'Something went wrong' });
+    }
+});
 
 module.exports = usersRouter

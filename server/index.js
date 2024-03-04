@@ -62,7 +62,8 @@ const limiter = rateLimit({
 
 app.use(limiter)
 
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 app.listen(process.env.PORT,()=>{
     console.log("running server!")

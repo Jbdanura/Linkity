@@ -10,7 +10,7 @@ import NotFound from './components/NotFound';
 
 function App() {
   const [user,setUser] = useState(null)
-  const baseUrl = "https://linkity.onrender.com"
+  const baseUrl = "http://localhost:10000"
 
   const logout = () =>{
     setUser(null)
