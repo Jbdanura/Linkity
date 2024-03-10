@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter, Routes,Route, useNavigate} from "react-router-dom"
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { useState,useEffect } from 'react';
 import HomeUnlogged from "./components/HomeUnlogged"
 import Home from './components/Home';
@@ -10,7 +10,7 @@ import NotFound from './components/NotFound';
 
 function App() {
   const [user,setUser] = useState(null)
-  const baseUrl = "http://localhost:10000"
+  const baseUrl = "https://linkity.onrender.com"
 
   const logout = () =>{
     setUser(null)
@@ -27,7 +27,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <Router>
         {!user && <HomeUnlogged setUser={setUser} baseUrl={baseUrl}/> }
         <Routes>
           <Route path="/" element={<Home user={user} logout={logout} baseUrl={baseUrl}/>}></Route>
@@ -35,7 +35,7 @@ function App() {
           <Route path="/user/:username" element={<Profile user={user} logout={logout} baseUrl={baseUrl}/>}></Route>
           <Route path="/configuration" element={<Configuration user={user} logout={logout} baseUrl={baseUrl}/>}></Route>
         </Routes>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }

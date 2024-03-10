@@ -100,6 +100,7 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
         <div className="home-left">
           <div className="left-head">
           <Image
+                key={`${userData ? userData.username : user.username}`}
                 cloudName="dchytnqhl"
                 onClick={()=>navigate(`/user/${userData ? userData.username : user.username}`)}
                 publicId={`linkity/${userData ? userData.username : user.username}`}
@@ -128,6 +129,7 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
                   {followers && followers.map(follower=>{
                       return <div className="modal-home-follower">
                                   <Image
+                                    key={`${follower.follower.username}`}
                                     cloudName="dchytnqhl"
                                     onClick={()=>navigate(`/user/${follower.follower.username}`)}
                                     publicId={userData ? `linkity/userData.username` : `linkity/${follower.follower.username}`}
@@ -149,6 +151,7 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
                   {following && following.map(followingOne=>{
                       return <div className="modal-home-follower">
                               <Image
+                                  key={`${followingOne.following.username}`}
                                   cloudName="dchytnqhl"
                                   onClick={()=>navigate(`/user/${followingOne.following.username}`)}
                                   publicId={userData ? `linkity/userData.username` : `linkity/${followingOne.following.username}`}

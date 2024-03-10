@@ -53,6 +53,7 @@ const NewPost = ({user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,se
         <h2 className={errorMessage  ? 'showErrorMessage' : 'hideErrorMessage'}>{errorMessage}</h2>
         <h2 className={successMessage  ? 'showSuccessMessage' : 'hideSuccessMessage'}>{successMessage}</h2>
         <Image
+            key={`${user.username}`}
             cloudName="dchytnqhl"
             publicId={`linkity/${user.username}`}
             crop="scale"

@@ -41,13 +41,13 @@ const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,
   }
 
   const handleImageError = () => {
-    // Do nothing when image fails to load
   };
 
   return (
     <div className="post">
       <div className="post-info">
           <Image
+            key={`${post.username}`}
             cloudName="dchytnqhl"
             onClick={()=>navigate(`/user/${post.username}`)}
             publicId={`linkity/${post.username}`}
@@ -66,6 +66,7 @@ const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,
         {editPost ? <><input className="edit-post-input" value={editPostContent} onChange={(e)=>setEditPostContent(e.target.value)}></input>
         <button className="submit-edit-post" onClick={()=>doEditPost()}>Save</button> </>:<>
                     <Image
+                    key={post.id}
                     cloudName="dchytnqhl"
                     className="post-content-image"
                     publicId={`linkity/${post.id}`}
@@ -99,6 +100,7 @@ const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,
             {post.Likes && post.Likes.map(like=>{
                       return <div className="modal-home-follower">
                                 <Image
+                                  key={`${like.user.username}`}
                                   cloudName="dchytnqhl"
                                   onClick={()=>navigate(`/user/${like.user.username}`)}
                                   publicId={`linkity/${like.user.username}`}

@@ -30,6 +30,7 @@ const Recommended = ({recommendedModal, setRecommendedModal,user,baseUrl}) => {
                 return <div className="recommended-user">
                     <div className="recommended-user-info">
                     <Image
+                        key={`${recommendedUser.username}`}
                         cloudName="dchytnqhl"
                         publicId={`linkity/${recommendedUser.username}`}
                         crop="scale"
