@@ -5,6 +5,7 @@ const Comment = require("../models/comment.js")
 const Follow = require("../models/follow.js")
 const Like = require("../models/like.js")
 const getToken = require("../middleware/token.js")
+const {cloudinary} = require("../db.js")
 
 postsRouter.get("/all",async(req,res)=>{
     const posts = await Post.findAll({
@@ -69,10 +70,17 @@ postsRouter.post("/new",getToken,async(req,res)=>{
     try {
         const user = req.user
         const postContent = req.body.content
+        const fileStr = req.body.fileReady;
         if(postContent.length < 5 || postContent.length > 300){ 
             return res.status(400).send("Post content must be between 5 and 300 characters long")
         }
         const newPost = await Post.create({content:postContent,userId:user.id,username:user.username})
+        if(fileStr){
+            const uploadResponse = await cloudinary.uploader.upload(fileStr,{
+                public_id: `${newPost.id}`,
+                folder: 'linkity'
+            });
+        }
         return res.status(200).send(newPost)
     } catch (error) {
         console.log(error)

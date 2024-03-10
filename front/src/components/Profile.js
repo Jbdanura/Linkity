@@ -6,7 +6,7 @@ import Home from './Home'
 
 const Profile = ({user,logout,baseUrl}) => {
   const username = useParams().username
-  const [userData,setUserData] = useState([])
+  const [userData,setUserData] = useState(null)
   const navigate = useNavigate()
 
   const getUserData = async(setUserData)=>{
@@ -27,7 +27,7 @@ const Profile = ({user,logout,baseUrl}) => {
 
   return (
       <div className="profile-found">
-         {userData ? <Home user={user} logout={logout} userData={userData} baseUrl={baseUrl} getUserData={getUserData} setUserData={setUserData}/> 
+         {userData != null ? <Home user={user} logout={logout} userData={userData} baseUrl={baseUrl} getUserData={getUserData} setUserData={setUserData}/> 
          : <Home user={user} logout={logout} notFound={true} baseUrl={baseUrl}/>
          }
       </div>

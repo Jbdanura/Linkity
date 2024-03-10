@@ -9,19 +9,34 @@ const NewPost = ({user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,se
   const [content,setContent] = useState("")
   const [errorMessage,setErrorMessage] = useState("")
   const [successMessage,setSuccessMessage] = useState("")
+  const [fileInputState, setFileInputState] = useState('');
+  const [selectedFile, setSelectedFile] = useState();
+  const [fileReady,setFileReady] = useState('');
+
+  const handleFileInputChange = (e) => {
+      const file = e.target.files[0];
+      setSelectedFile(file);
+      setFileInputState(e.target.value);
+      if (!file) return; 
+      const reader = new FileReader();
+      reader.readAsDataURL(file); 
+      reader.onloadend = () => {
+          setFileReady(reader.result)
+      };
+  };
 
   const createPost = async (e) => {
     try {
         e.preventDefault()
-        const post = await axios.post(`${baseUrl}/posts/new`,{content},{headers:{"Authorization":`Bearer ${user.token}`}})
+        const post = await axios.post(`${baseUrl}/posts/new`,{content,fileReady},{headers:{"Authorization":`Bearer ${user.token}`}})
         setSuccessMessage("Published post")
         setContent("")
+        setFileInputState("")
+        setSelectedFile("")
+        setFileReady("")
         setInterval(()=>{
           setSuccessMessage(null)
-          getPosts(showAllPosts,setHomePosts)
-          if(getUserData){
-            getUserData(setUserData)
-          }
+          window.location.reload()
         },1000)
     } catch (error) {
         if(error.response.data){
@@ -44,8 +59,16 @@ const NewPost = ({user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,se
             defaultImage="0.jpg"
             > </Image><p>→</p>
         <div className="new-post-info">
-            <input placeholder="Your post here..." onChange={(e)=>setContent(e.target.value)} value={content}></input>
+            <input placeholder="Your post here..." className="post-new-content" onChange={(e)=>setContent(e.target.value)} value={content}>   
+            </input>
             <button type="submit">+</button>
+            <input
+                type="file"
+                name="image"
+                onChange={handleFileInputChange}
+                value={fileInputState}
+                className="post-new-img"
+            />
         </div>
     </form>
   )

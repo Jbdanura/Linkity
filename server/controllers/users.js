@@ -150,13 +150,15 @@ usersRouter.post("/follow",getToken,async(req,res)=>{
         const user = req.user
         const userToFollow = await User.findOne({where: {username:req.body.userToFollow}})
         const alreadyFollowing = await Follow.findOne({where:{followingId:userToFollow.id, followerId:user.id}})
-        console.log(userToFollow,user,alreadyFollowing)
+        if(alreadyFollowing) console.log("following already")
         if(alreadyFollowing){
             await alreadyFollowing.destroy()
+            console.log("destroyed")
             return res.status(200).send(false)
         }
         const follow = await Follow.create({followingId: userToFollow.id, followerId: user.id})
         if(follow){
+            console.log("following")
             return res.status(200).send(follow)
         }
     } catch (error) {
@@ -164,17 +166,6 @@ usersRouter.post("/follow",getToken,async(req,res)=>{
         return res.status(400).send(error)
     }
 })
-
-usersRouter.get('/images', async (req, res) => {
-    const { resources } = await cloudinary.search
-        .expression('folder:dev_setups')
-        .sort_by('public_id', 'desc')
-        .max_results(30)
-        .execute();
-
-    const publicIds = resources.map((file) => file.public_id);
-    res.send(publicIds);
-});
 
 usersRouter.post('/uploadImage', getToken,async (req, res) => {
     try {

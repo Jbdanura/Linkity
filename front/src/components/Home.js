@@ -16,11 +16,12 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
   const [homePosts,setHomePosts] = useState([])
   const [following,setFollowing] = useState([])
   const [followers,setFollowers] = useState([])
-  const [isFollowing,setIsFollowing] = useState(false)
   const [showFollowersModal, setShowFollowersModal] = useState(false);
   const [showFollowingModal, setShowFollowingModal] = useState(false);
   const [paginationNumber, setPaginationNumber] = useState(1);
   const navigate = useNavigate()
+
+  console.log(userData && userData.username,followers)
 
   const getPosts = async (showAllPosts,setHomePosts) =>{
     try {
@@ -42,26 +43,18 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
   const follow = async (userToFollow)=>{
     try {
       const result = await axios.post(`${baseUrl}/users/follow`,{userToFollow},{headers:{"Authorization":`Bearer ${user.token}`}})
-    } catch (error) {}
-  }
-
-  const followingState = async() => {
-    try {
-      const result = await axios.post(`${baseUrl}/users/followingState`,{following:userData.username,follower:user.username})
-      setIsFollowing(result.data)
-    } catch (error) {}
+    } catch (error) {console.log(error)}
   }
 
   const getFollow = async() => {
     try {
-      const usernameMain = userData ? userData.username : user.username
-      const result = await axios.get(`${baseUrl}/users/followInfo/${usernameMain}`)
+      const result = await axios.get(`${baseUrl}/users/followInfo/${userData ? userData.username : user.username}`)
       setFollowing(result.data.following)
       setFollowers(result.data.followers)
     } catch (error) {}
   }
 
-  useEffect(()=>{getPosts(showAllPosts,setHomePosts);getFollow();followingState()},[showAllPosts,user])
+  useEffect(()=>{getPosts(showAllPosts,setHomePosts);getFollow();},[showAllPosts,user,userData])
 
   const handleScroll = () => {
     const windowHeight = 'innerHeight' in window ? window.innerHeight : document.documentElement.offsetHeight;
@@ -71,7 +64,6 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
     const windowBottom = windowHeight + window.pageYOffset;
 
     if (windowBottom >= docHeight) {
-      // User has scrolled to the bottom
       setPaginationNumber((prevPaginationNumber) => prevPaginationNumber + 1);
     }
   };
@@ -79,9 +71,9 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []); // Add/remove event listener on mount/unmount
+  }, []); 
 
-  // New functions to open and close modal
+
   const openFollowersModal = () => {
     setShowFollowersModal(true);
   };
@@ -127,7 +119,7 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
               <p className="number">{following && following.length}</p>
             </div>
           </div>
-            {/* Modal for Followers */}
+
             {showFollowersModal && (
               <div className="modal-home">
                 <div className="modal-home-content">
@@ -149,7 +141,6 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
               </div>
             )}
 
-            {/* Modal for Following */}
             {showFollowingModal && (
               <div className="modal-home">
                 <div className="modal-home-content">
@@ -171,8 +162,8 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
               </div>
             )}
           {(userData && userData.username != user.username )&& 
-          <>{!isFollowing ? <button className="left-head-follow" onClick={()=>{follow(userData.username);getFollow();followingState()}}>Follow</button> :
-          <button className="left-head-unfollow" onClick={()=>{follow(userData.username);getFollow();followingState()}}>Unfollow</button> }</>}
+          <>{!followers.find(item=>item.follower.username === user.username) ? <button className="left-head-follow" onClick={()=>{follow(userData.username);window.location.reload()}}>Follow</button> :
+          <button className="left-head-unfollow" onClick={()=>{follow(userData.username);window.location.reload()}}>Unfollow</button> }</>}
         </div>
         <div className="home-mid">
           {(!userData && !notFound) && <NewPost user={user} baseUrl={baseUrl} getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts}/>}

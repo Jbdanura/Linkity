@@ -39,6 +39,11 @@ const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,
       const result = await axios.post(`${baseUrl}/posts/like/${post.id}`,{},{headers:{"Authorization":`Bearer ${user.token}`}})
     } catch (error) {}
   }
+
+  const handleImageError = () => {
+    // Do nothing when image fails to load
+  };
+
   return (
     <div className="post">
       <div className="post-info">
@@ -59,8 +64,18 @@ const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,
       </div>
       <div className="post-content">
         {editPost ? <><input className="edit-post-input" value={editPostContent} onChange={(e)=>setEditPostContent(e.target.value)}></input>
-        <button className="submit-edit-post" onClick={()=>doEditPost()}>Save</button> </>:
-        <p>{post.content}</p>
+        <button className="submit-edit-post" onClick={()=>doEditPost()}>Save</button> </>:<>
+                    <Image
+                    cloudName="dchytnqhl"
+                    className="post-content-image"
+                    publicId={`linkity/${post.id}`}
+                    crop="scale"
+                    onError={({ currentTarget }) => {
+                      currentTarget.onerror = null; 
+                      currentTarget.remove()
+                    }}
+                > </Image>
+        <p>{post.content}</p></>
         }
       </div>
       <div className="like-post">

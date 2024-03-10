@@ -12,7 +12,7 @@
     margin-right: 3px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
-.new-post input{
+.post-new-content{
     width: 90%;
     height: 40px;
     border-radius: 15px;
@@ -43,12 +43,30 @@
     display: flex;
     align-items: center;
     width: 90%;
+    position: relative;
+}
+.post-new-img{
+    position: absolute;
+    bottom: -45px;
+    left: 50px;
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
 }
 @media  screen and (max-width: 1000px) {
-    .new-post input{
+    .post-new-content{
         font-size: 20px;
         width: 30vw;
         padding-left: 20px;
+    }
+    .post-new-img{
+        position: absolute;
+        bottom: -45px;
+        left: 0px;
+        padding: 0;
+        margin: 0;
+        font-size: 15px;
+        max-width: 250px;
     }
     .new-post img{
         margin-left: 15px;
@@ -58,8 +76,9 @@
     .new-post{
         padding: 10px;
         margin-top: 10px;
+        width: 90%;
     }
-    .new-post input{
+    .post-new-content{
         font-size: 20px;
         padding-left: 20px;
         width: 70vw;
@@ -74,8 +93,17 @@
         margin: 0;
         margin-top: 10px;
     }
-    .new-post input{
+    .post-new-content{
         width: 60vw;
         font-size: 15px;
+    }
+    .post-new-img{
+        position: absolute;
+        bottom: -45px;
+        left: 0px;
+        padding: 0;
+        margin: 0;
+        font-size: 15px;
+        max-width: 200px;
     }
 }
