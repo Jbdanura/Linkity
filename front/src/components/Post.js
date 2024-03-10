@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from "axios"
 import Comment from './Comment'
 import Comments from './Comments'
+import { Image,Transformation } from 'cloudinary-react';
 
 const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,setUserData}) => {
   const [editPost,setEditPost] = useState(false)
@@ -38,11 +39,17 @@ const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,
       const result = await axios.post(`${baseUrl}/posts/like/${post.id}`,{},{headers:{"Authorization":`Bearer ${user.token}`}})
     } catch (error) {}
   }
-
   return (
     <div className="post">
       <div className="post-info">
-        <img className="post-icon" src={UserIcon}/>
+          <Image
+            cloudName="dchytnqhl"
+            onClick={()=>navigate(`/user/${post.username}`)}
+            publicId={`linkity/${post.username}`}
+            crop="scale"
+            defaultImage="0.jpg"
+            className="post-icon"
+          ></Image>
         <p onClick={()=>navigate(`/user/${post.username}`)}>{post.username}</p>
         <div class="clearfix"></div>
         {post.username == user.username && <div className="post-config">
@@ -76,7 +83,13 @@ const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,
             <h2>Likes</h2>
             {post.Likes && post.Likes.map(like=>{
                       return <div className="modal-home-follower">
-                              <img src={UserIcon}/>
+                                <Image
+                                  cloudName="dchytnqhl"
+                                  onClick={()=>navigate(`/user/${like.user.username}`)}
+                                  publicId={`linkity/${like.user.username}`}
+                                  crop="scale"
+                                  defaultImage="0.jpg"
+                              > </Image>
                               <h4 onClick={()=>{navigate(`/user/${like.user.username}`);setLikesModal(false)}}>{like.user.username}</h4>
                       </div>
                   })}

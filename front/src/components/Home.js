@@ -7,6 +7,7 @@ import NewPost from './NewPost'
 import Post from './Post'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { Image,Transformation } from 'cloudinary-react';
 
 
 const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) => {
@@ -106,7 +107,13 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
       <div className="home-container">
         <div className="home-left">
           <div className="left-head">
-            <img src={UserIcon}></img>
+          <Image
+                cloudName="dchytnqhl"
+                onClick={()=>navigate(`/user/${userData ? userData.username : user.username}`)}
+                publicId={`linkity/${userData ? userData.username : user.username}`}
+                crop="scale"
+                defaultImage="0.jpg"
+            />
             {userData ? <p>@{userData.username}</p> :
             <p>@{user.username}</p>}
           </div>
@@ -128,7 +135,13 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
                   <h2>Followers</h2>
                   {followers && followers.map(follower=>{
                       return <div className="modal-home-follower">
-                              <img src={UserIcon}/>
+                                  <Image
+                                    cloudName="dchytnqhl"
+                                    onClick={()=>navigate(`/user/${follower.follower.username}`)}
+                                    publicId={userData ? `linkity/userData.username` : `linkity/${follower.follower.username}`}
+                                    crop="scale"
+                                    defaultImage="0.jpg"
+                                />
                               <h4  onClick={()=>{navigate(`/user/${follower.follower.username}`);closeFollowersModal()}}>{follower.follower.username}</h4>
                       </div>
                   })}
@@ -144,7 +157,13 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
                   <h2>Following</h2>
                   {following && following.map(followingOne=>{
                       return <div className="modal-home-follower">
-                              <img src={UserIcon}/>
+                              <Image
+                                  cloudName="dchytnqhl"
+                                  onClick={()=>navigate(`/user/${followingOne.following.username}`)}
+                                  publicId={userData ? `linkity/userData.username` : `linkity/${followingOne.following.username}`}
+                                  crop="scale"
+                                  defaultImage="0.jpg"
+                              />
                               <h4 onClick={()=>{navigate(`/user/${followingOne.following.username}`);closeFollowingModal()}}>{followingOne.following.username}</h4>
                       </div>
                   })}

@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import "./Navbar.css"
 import {useNavigate} from "react-router-dom"
 import UserIcon from "../images/user.png"
+import { Image,Transformation } from 'cloudinary-react';
 
 const Navbar = ({user,logout,baseUrl}) => {
   const navigate = useNavigate()
@@ -18,7 +19,14 @@ const Navbar = ({user,logout,baseUrl}) => {
         </div>
         <input placeholder="Search..." value={search} onChange={(e)=>setSearch(e.target.value)} onKeyDown={handleKeyDown}/>
         <div className="navbar-right">
-            <img className="my-profile" onClick={()=>navigate(`/user/${user.username}`)} src={UserIcon}></img>
+            <Image
+                cloudName="dchytnqhl"
+                className="my-profile"
+                onClick={()=>navigate(`/user/${user.username}`)}
+                publicId={`linkity/${user.username}`}
+                crop="scale"
+                defaultImage="0.jpg"
+            > </Image>
             <button className="config" onClick={()=>navigate(`/configuration`)}><i class="fa fa-cog" aria-hidden="true"></i></button>
             <button className="logout" onClick={()=>{logout();navigate("/")}}><i class="fa fa-sign-out" aria-hidden="true"></i></button>
         </div>

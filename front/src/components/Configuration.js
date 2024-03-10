@@ -11,8 +11,6 @@ const Configuration = ({user,logout,baseUrl}) => {
   const [successMessage,setSuccessMessage] = useState("")
   const [fileInputState, setFileInputState] = useState('');
   const [selectedFile, setSelectedFile] = useState();
-  const [successMsg, setSuccessMsg] = useState('');
-  const [errMsg, setErrMsg] = useState('');
 
   const handleFileInputChange = (e) => {
       const file = e.target.files[0];
@@ -39,16 +37,29 @@ const Configuration = ({user,logout,baseUrl}) => {
 
   const uploadImage = async (base64EncodedImage) => {
       try {
-          await fetch(`${baseUrl}/users/uploadImage`, {
+          const response = await fetch(`${baseUrl}/users/uploadImage`, {
               method: 'POST',
               body: JSON.stringify({ data: base64EncodedImage }),
-              headers: { 'Content-Type': 'application/json' },
+              headers: { 'Content-Type': 'application/json', 'Authorization':`Bearer ${user.token}`},
           });
+          if (!response.ok){
+            setErrorMessage('Error uploading image');
+            setTimeout(()=>{
+              setErrorMessage(null)
+            },3000)
+            return
+          }
           setFileInputState('');
-          setSuccessMsg('Image uploaded');
+          setSuccessMessage('Image uploaded');
+          setTimeout(()=>{
+            setSuccessMessage(null)
+            window.location.reload()
+          },2000)
       } catch (err) {
-          console.error(err);
-          setErrMsg('Error uploading image');
+          setErrorMessage('Error uploading image');
+          setTimeout(()=>{
+            setErrorMessage(null)
+          },3000)
       }
   };
 

@@ -18,9 +18,9 @@ const connect = async() => {
 const configCloudinary = () => {
   try {
     cloudinary.config({
-      cloud_name: 'YOUR_CLOUD_NAME',
-      api_key: 'YOUR_API_KEY',
-      api_secret: 'YOUR_API_SECRET'
+      cloud_name: process.env.CLOUDNAME,
+      api_key: process.env.CLOUDKEY,
+      api_secret: process.env.CLOUDSECRET,
     });
   } catch (error) {
     console.log(error)

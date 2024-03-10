@@ -3,6 +3,8 @@ import "./RecommendedUser.css"
 import axios from "axios"
 import userAvatar from "../images/user.png"
 import { useNavigate } from 'react-router-dom'
+import { Image,Transformation } from 'cloudinary-react';
+
 
 const Recommended = ({recommendedModal, setRecommendedModal,user,baseUrl}) => {
   const [users,setUsers] = useState("")
@@ -27,7 +29,12 @@ const Recommended = ({recommendedModal, setRecommendedModal,user,baseUrl}) => {
                 if(recommendedUser.username == user.username) return null
                 return <div className="recommended-user">
                     <div className="recommended-user-info">
-                        <img src={userAvatar}/>
+                    <Image
+                        cloudName="dchytnqhl"
+                        publicId={`linkity/${recommendedUser.username}`}
+                        crop="scale"
+                        defaultImage="0.jpg"
+                    />
                         <h4 onClick={()=>navigate(`/user/${recommendedUser.username}`)}>@{recommendedUser.username}</h4>
                     </div>
                 </div>

@@ -176,11 +176,12 @@ usersRouter.get('/images', async (req, res) => {
     res.send(publicIds);
 });
 
-usersRouter.post('/uploadImage', async (req, res) => {
+usersRouter.post('/uploadImage', getToken,async (req, res) => {
     try {
         const fileStr = req.body.data;
-        const uploadResponse = await cloudinary.uploader.upload(fileStr, {
-            upload_preset: 'dev_setups',
+        const uploadResponse = await cloudinary.uploader.upload(fileStr,{
+            public_id: `${req.user.username}`,
+            folder: 'linkity'
         });
         console.log(uploadResponse);
         res.status(200).send("Image uploaded");

@@ -2,6 +2,8 @@ import React,{useState} from 'react'
 import "./NewPost.css"
 import UserIcon from "../images/user.png"
 import axios from "axios"
+import { Image,Transformation } from 'cloudinary-react';
+
 
 const NewPost = ({user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,setUserData}) => {
   const [content,setContent] = useState("")
@@ -35,7 +37,12 @@ const NewPost = ({user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,se
     <form className="new-post" onSubmit={(e)=>createPost(e)}>
         <h2 className={errorMessage  ? 'showErrorMessage' : 'hideErrorMessage'}>{errorMessage}</h2>
         <h2 className={successMessage  ? 'showSuccessMessage' : 'hideSuccessMessage'}>{successMessage}</h2>
-        <img src={UserIcon}/><p>→</p>
+        <Image
+            cloudName="dchytnqhl"
+            publicId={`linkity/${user.username}`}
+            crop="scale"
+            defaultImage="0.jpg"
+            > </Image><p>→</p>
         <div className="new-post-info">
             <input placeholder="Your post here..." onChange={(e)=>setContent(e.target.value)} value={content}></input>
             <button type="submit">+</button>
