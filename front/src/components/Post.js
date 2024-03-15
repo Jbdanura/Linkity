@@ -7,7 +7,7 @@ import Comment from './Comment'
 import Comments from './Comments'
 import { Image,Transformation } from 'cloudinary-react';
 
-const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,setUserData}) => {
+const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,setUserData,likePost}) => {
   const [editPost,setEditPost] = useState(false)
   const [editPostContent,setEditPostContent] = useState(post.content)
   const [likesModal,setLikesModal] = useState(false)
@@ -34,11 +34,7 @@ const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,
       }
     } catch (error) { }
   }
-  const likePost = async () => {
-    try {
-      const result = await axios.post(`${baseUrl}/posts/like/${post.id}`,{},{headers:{"Authorization":`Bearer ${user.token}`}})
-    } catch (error) {}
-  }
+
 
   const handleImageError = () => {
   };
@@ -80,16 +76,8 @@ const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,
         }
       </div>
       <div className="like-post">
-        {post.Likes.some((like) => like.userId === user.id) ? <button className="unlike-post-btn" onClick={()=>{likePost(); getPosts(showAllPosts,setHomePosts);
-              if(getUserData){
-                getUserData(setUserData)
-              }
-        }}>❤</button>
-         : <button className="like-post-btn" onClick={()=>{likePost();getPosts(showAllPosts,setHomePosts);
-          if(getUserData){
-            getUserData(setUserData)
-          }
-         }}>❤</button>}
+        {post.Likes.some((like) => like.userId === user.id) ? <button className="unlike-post-btn" onClick={()=>{likePost(post.id);}}>❤</button>
+         : <button className="like-post-btn" onClick={()=>{likePost(post.id)}}>❤</button>}
         <button className="show-likes" onClick={()=>setLikesModal(!likesModal)}>{post.Likes.length}</button>
       </div>
       {likesModal && (
@@ -113,8 +101,8 @@ const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,
           </div>
         </div>
       )}
-      <Comment user={user} post={post} baseUrl={baseUrl} getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts}/>
-      <Comments user={user} post={post} baseUrl={baseUrl} getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts}/>
+      <Comment user={user} post={post} baseUrl={baseUrl} getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts} getUserData={getUserData} setUserData={setUserData}/>
+      <Comments user={user} post={post} baseUrl={baseUrl} getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts} getUserData={getUserData} setUserData={setUserData}/>
     </div>
   )
 }

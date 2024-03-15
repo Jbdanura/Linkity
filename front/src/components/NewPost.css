@@ -47,7 +47,7 @@
 }
 .post-new-img{
     position: absolute;
-    bottom: -45px;
+    bottom: -30px;
     left: 50px;
     padding: 0;
     margin: 0;
@@ -61,7 +61,6 @@
     }
     .post-new-img{
         position: absolute;
-        bottom: -45px;
         left: 0px;
         padding: 0;
         margin: 0;
@@ -99,7 +98,6 @@
     }
     .post-new-img{
         position: absolute;
-        bottom: -45px;
         left: 0px;
         padding: 0;
         margin: 0;

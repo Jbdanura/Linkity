@@ -53,7 +53,6 @@ const Configuration = ({user,logout,baseUrl}) => {
           setSuccessMessage('Image uploaded');
           setTimeout(()=>{
             setSuccessMessage(null)
-            window.location.reload()
           },2000)
       } catch (err) {
           setErrorMessage('Error uploading image');

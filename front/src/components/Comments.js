@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import "./Comments.css"
 import axios from "axios"
 
-const Comments = ({user,post,baseUrl,getPosts,showAllPosts,setHomePosts}) => {
+const Comments = ({user,post,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,setUserData}) => {
   const navigate = useNavigate()
 
   const deleteComment = async (id) => {
@@ -11,6 +11,7 @@ const Comments = ({user,post,baseUrl,getPosts,showAllPosts,setHomePosts}) => {
       const result = await axios.delete(`${baseUrl}/posts/comment/${id}`,{headers:{"Authorization":`Bearer ${user.token}`}})
       alert("Deleted comment!")
       getPosts(showAllPosts,setHomePosts)
+      if(getUserData) getUserData(setUserData)
     } catch (error) {}
   }
 

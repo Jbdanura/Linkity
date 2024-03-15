@@ -21,6 +21,7 @@ const Profile = ({user,logout,baseUrl}) => {
     if (username && username !== userData?.username) {
       getUserData(setUserData);
     }
+    
   }, [username, userData]);
 
   if(!user) return null

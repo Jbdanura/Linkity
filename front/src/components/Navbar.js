@@ -20,7 +20,7 @@ const Navbar = ({user,logout,baseUrl}) => {
         <input placeholder="Search..." value={search} onChange={(e)=>setSearch(e.target.value)} onKeyDown={handleKeyDown}/>
         <div className="navbar-right">
             <Image
-                key={`${user.username}`}
+                key={`${user.username}-${Date.now()}`}
                 cloudName="dchytnqhl"
                 className="my-profile"
                 onClick={()=>navigate(`/user/${user.username}`)}

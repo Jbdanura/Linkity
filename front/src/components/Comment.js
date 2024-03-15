@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import axios from "axios"
 import "./Comment.css"
 
-const Comment = ({user,post,baseUrl,getPosts,showAllPosts,setHomePosts}) => {
+const Comment = ({user,post,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,setUserData}) => {
   const [description,setDescription] = useState("")
   const newComment = async(e) =>{
     try {
@@ -11,6 +11,7 @@ const Comment = ({user,post,baseUrl,getPosts,showAllPosts,setHomePosts}) => {
         const result = await axios.post(`${baseUrl}/posts/comment/${post.id}`,{description},
         {headers:{"Authorization":`Bearer ${user.token}`}})
         getPosts(showAllPosts,setHomePosts)
+        if(getUserData) getUserData(setUserData)
         setDescription("")
     } catch (error) {
     }

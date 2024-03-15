@@ -21,8 +21,6 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
   const [paginationNumber, setPaginationNumber] = useState(1);
   const navigate = useNavigate()
 
-  console.log(userData && userData.username,followers)
-
   const getPosts = async (showAllPosts,setHomePosts) =>{
     try {
       if(showAllPosts == true){
@@ -43,6 +41,7 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
   const follow = async (userToFollow)=>{
     try {
       const result = await axios.post(`${baseUrl}/users/follow`,{userToFollow},{headers:{"Authorization":`Bearer ${user.token}`}})
+      if(getUserData) getUserData(setUserData)
     } catch (error) {console.log(error)}
   }
 
@@ -51,6 +50,14 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
       const result = await axios.get(`${baseUrl}/users/followInfo/${userData ? userData.username : user.username}`)
       setFollowing(result.data.following)
       setFollowers(result.data.followers)
+    } catch (error) {}
+  }
+
+  const likePost = async (postId) => {
+    try {
+      const result = await axios.post(`${baseUrl}/posts/like/${postId}`,{},{headers:{"Authorization":`Bearer ${user.token}`}})
+      if(userData) getUserData(setUserData)
+      getPosts(showAllPosts,setHomePosts)
     } catch (error) {}
   }
 
@@ -89,6 +96,7 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
   const closeFollowingModal = () => {
     setShowFollowingModal(false);
   };
+
 
 
   if(!user) return null
@@ -165,8 +173,8 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
               </div>
             )}
           {(userData && userData.username != user.username )&& 
-          <>{!followers.find(item=>item.follower.username === user.username) ? <button className="left-head-follow" onClick={()=>{follow(userData.username);window.location.reload()}}>Follow</button> :
-          <button className="left-head-unfollow" onClick={()=>{follow(userData.username);window.location.reload()}}>Unfollow</button> }</>}
+          <>{!followers.find(item=>item.follower.username === user.username) ? <button className="left-head-follow" onClick={()=>{follow(userData.username)}}>Follow</button> :
+          <button className="left-head-unfollow" onClick={()=>{follow(userData.username)}}>Unfollow</button> }</>}
         </div>
         <div className="home-mid">
           {(!userData && !notFound) && <NewPost user={user} baseUrl={baseUrl} getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts}/>}
@@ -176,8 +184,8 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
           setHomePosts={setHomePosts} getUserData={getUserData} setUserData={setUserData}/>}
           <div className="posts-container">
           {(userData && userData.posts && userData.posts.length > 0) ? userData.posts.slice(0,paginationNumber * 10).map(post=>{
-            return <Post post={post} user={user} baseUrl={baseUrl}
-             getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts} getUserData={getUserData} setUserData={setUserData}/>
+            return <Post post={post} user={user} baseUrl={baseUrl}  getPosts={getPosts} showAllPosts={showAllPosts} 
+            setHomePosts={setHomePosts} getUserData={getUserData} setUserData={setUserData} likePost={likePost} key={post.id}/>
           }) :
             <div className="posts-home-container">
               {(!notFound && !userData) && <div className="posts-home">
@@ -187,8 +195,8 @@ const Home = ({user,logout,userData,notFound,baseUrl,getUserData,setUserData}) =
                 </select>
                 <div className="posts-home-show">
                   {(homePosts && homePosts.length > 0) && homePosts.slice(0,paginationNumber * 3).map(homePost=>{
-                    return <Post post={homePost} user={user} baseUrl={baseUrl}
-                     getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts}/>
+                    return <Post key={homePost.id} post={homePost} user={user} baseUrl={baseUrl} getPosts={getPosts} showAllPosts={showAllPosts} setHomePosts={setHomePosts}
+                    likePost={likePost}/>
                   })}
                 </div>
               </div>}
