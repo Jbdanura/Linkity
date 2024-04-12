@@ -22,6 +22,21 @@
     color: rgb(77, 51, 117);
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
+
+input::file-selector-button {
+    background-color: dodgerblue;
+    color: white;
+    border: 1px solid blue;
+    padding: 5px 10px;
+}
+.post-new-img{
+    position: absolute;
+    left: 0px;
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+    max-width: 250px;
+}
 .new-post p{
     font-size: 25px;
     font-weight: bolder;
@@ -48,7 +63,7 @@
 .post-new-img{
     position: absolute;
     bottom: -30px;
-    left: 50px;
+    left: 0;
     padding: 0;
     margin: 0;
     font-size: 15px;
