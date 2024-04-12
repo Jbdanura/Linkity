@@ -8,7 +8,7 @@ const connect = async() => {
     try {
         await sequelize.authenticate();
         console.log('Connection has been established successfully.');
-        await sequelize.sync({ alter: true })
+        await sequelize.sync({ alter: true });
         console.log("Synced db.");
       } catch (error) {
         console.error('Unable to connect to the database:', error);
@@ -26,6 +26,7 @@ const configCloudinary = () => {
     console.log(error)
   }
 }
+
 configCloudinary()
 
 module.exports = {sequelize,connect,cloudinary}

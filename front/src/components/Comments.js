@@ -21,7 +21,7 @@ const Comments = ({user,post,baseUrl,getPosts,showAllPosts,setHomePosts,getUserD
             const commentId = comment.id
             return <div className="comment">
                 <p className="comment-user" onClick={()=>navigate(`/user/${comment.user.username}`)}>@{comment.user.username}</p>
-                {user.username === comment.user.username && <button onClick={()=>deleteComment(commentId)} className="delete-comment">Delete</button>}
+                {user.username === comment.user.username && <button onClick={()=>deleteComment(commentId)} className="delete-comment">X</button>}
                 <p className="comment-content">{comment.description}</p>
             </div>
         })}

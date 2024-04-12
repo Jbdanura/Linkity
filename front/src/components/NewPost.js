@@ -58,7 +58,7 @@ const NewPost = ({user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,se
             publicId={`linkity/${user.username}`}
             crop="scale"
             defaultImage="0.jpg"
-            > </Image><p>→</p>
+            > </Image>
         <div className="new-post-info">
             <input placeholder="Your post here..." className="post-new-content" onChange={(e)=>setContent(e.target.value)} value={content}>   
             </input>

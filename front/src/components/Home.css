@@ -8,10 +8,9 @@
 }
 .home-left .left-head img{
     width: 80px;
-    border-radius: 25px;
-    border: 3px solid black;
     margin-left: 20px;
 }
+
 .home-left{
     width: 20vw;
     background-color: white;
