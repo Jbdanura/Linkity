@@ -54,8 +54,8 @@ const Post = ({post,user,baseUrl,getPosts,showAllPosts,setHomePosts,getUserData,
         <p onClick={()=>navigate(`/user/${post.username}`)}>{post.username}</p>
         <div class="clearfix"></div>
         {post.username == user.username && <div className="post-config">
-          <button className="edit-post" onClick={()=>setEditPost(!editPost)}>Edit</button>
-          <button className="delete-post" onClick={()=>doDeletePost()}>Delete</button>
+          <button className="edit-post" onClick={()=>setEditPost(!editPost)}>✎</button>
+          <button className="delete-post" onClick={()=>doDeletePost()}>X</button>
         </div>}
       </div>
       <div className="post-content">
