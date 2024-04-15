@@ -48,6 +48,7 @@ postsRouter.get("/all/following/:username", async (req, res) => {
             include: [
                 {
                     model: User,
+                    attributes: { exclude: ['password'] },
                     where: { id: followingIds },
                 },{model:Like,include:{model:User,attributes:["username"]}},
                 {
