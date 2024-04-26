@@ -17,7 +17,7 @@ const Navbar = ({user,logout,baseUrl}) => {
         <div className="navbar-left">
             <button className="home" onClick={()=>navigate("/")}><i class="fa fa-home"></i> Home</button>
         </div>
-        <input placeholder="Search..." value={search} onChange={(e)=>setSearch(e.target.value)} onKeyDown={handleKeyDown}/>
+        <input placeholder="Search users..." value={search} onChange={(e)=>setSearch(e.target.value)} onKeyDown={handleKeyDown}/>
         <div className="navbar-right">
             <Image
                 key={`${user.username}-${Date.now()}`}

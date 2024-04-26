@@ -26,12 +26,12 @@
 }
 @media screen and (max-width: 1000px){
     .comment-container input{
-        width: 80%;
+        width: 88%;
         height: 30px;
         font-size: 15px;
         border: 1px solid grey;
     }
     .comment-container button{
-        width: 15%;
+        width: 35px;
     }
 }

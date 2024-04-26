@@ -1,15 +1,18 @@
 .posts-container{
-    margin-top: 70px;
+    margin-top: 40px;
 }
 .post{
     background-color: white;
     padding: 20px;
     margin-bottom: 10px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 5px;
+    border: 1px solid rgba(128, 128, 128, 0.527);
 }
 .post-info{
     display: flex;
     position: relative;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.082);
 }
 .post-info:hover{
     cursor: pointer;

@@ -3,6 +3,8 @@
     padding: 10px;
     margin-left: 30px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 5px;
+    border: 1px solid rgba(128, 128, 128, 0.527);
 }
 .recommended-container h3{
     color: grey;
